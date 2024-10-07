@@ -1,0 +1,15 @@
+@font-face {
+  font-family: "Empire";
+  src: url("/assets/Font/empire_4/Empire.ttf");
+}
+@font-face {
+  font-family: "Awelier";
+  src: url("/assets/Font/made_awelier/MADEAwelierPERSONALUSE-Regular.otf");
+}
+
+// variable.scss
+$font-title: "Empire";
+$font-text: "Awelier";
+$border-color: #ffd700;
+$font-color-title: #faebd7;
+$font-color-text: #fffafa;

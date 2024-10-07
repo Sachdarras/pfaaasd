@@ -1,0 +1,12 @@
+@use "./variable.scss";
+@import './home.scss';
+
+body {
+  border-top: 10px groove;
+  border-right: 10px ridge;
+  border-bottom: 10px ridge;
+  border-left: 10px groove;
+ border-color: variable.$border-color;
+  box-sizing: border-box;
+  background: #3a3e40;
+}
