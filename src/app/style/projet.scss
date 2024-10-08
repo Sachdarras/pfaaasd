@@ -34,7 +34,7 @@
   text-align: center;
   margin: 20px auto;
   padding: 20px;
-  width: 90%;
+  width: 90%; /* Largeur ajustée pour les écrans plus petits */
   box-shadow: inset -1px 3px 8px 5px gold, 2px 1px 10px 0px black,
     5px 5px 15px 5px black;
   background: whitesmoke;
@@ -46,7 +46,9 @@
 
 /* Image du projet */
 .img-project {
-  width: 60%;
+  width: 60%; /* Largeur par défaut */
+  max-width: 100%; /* S'assure que l'image ne dépasse pas la largeur de son conteneur */
+  height: auto; /* Hauteur automatique pour conserver le ratio */
   border-radius: 20px;
   box-shadow: inset -1px 3px 8px 5px gold, 2px 1px 10px 0px black,
     5px 5px 15px 5px black;
@@ -65,7 +67,7 @@
 /* Bouton pour voir plus */
 .view-more-button {
   padding: 10px 20px;
-  margin:10px;
+  margin: 10px;
   margin-top: 30px;
   font-size: 1.2em;
   color: #ffd700;
@@ -77,8 +79,7 @@
   cursor: pointer;
   transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease,
     box-shadow 0.3s ease;
-    font-family: variable.$font-text;
- 
+  font-family: variable.$font-text;
 }
 
 .view-more-button:hover {
@@ -109,4 +110,40 @@
 
 .carousel-control.prev {
   left: -10px; /* Positionne le bouton "précédent" à l'extérieur du cadre */
+}
+
+/* Styles responsives */
+@media (max-width: 768px) {
+  .project {
+    width: 95%; /* Ajustement de la largeur pour les écrans plus petits */
+    padding: 15px; /* Réduction du padding */
+  }
+
+  .img-project {
+    width: 80%; /* Ajustement de la largeur de l'image */
+  }
+
+  .view-more-button {
+    font-size: 1em; /* Ajustement de la taille de police pour le bouton */
+    padding: 8px 16px; /* Ajustement du padding pour le bouton */
+  }
+  .page-container{width: 90%;}
+
+}
+
+@media (max-width: 480px) {
+  .project h4 {
+    font-size: 1.5rem; /* Réduction de la taille de la police pour les petits écrans */
+  }
+
+  .view-more-button {
+    font-size: 0.9em; /* Réduction de la taille de police pour le bouton */
+    padding: 6px 12px; /* Ajustement du padding pour le bouton */
+  }
+
+  /* Ajustement de la largeur de l'image */
+  .img-project {
+    width: 90%; /* Ajustement de la largeur de l'image pour petits écrans */
+  }
+ 
 }

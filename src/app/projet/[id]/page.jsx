@@ -34,9 +34,7 @@ function ProjectPage({ params }) {
       </div>
 
       <div className="project-detail-container">
-        <button className="back-button" onClick={() => router.back()}>
-          Retour
-        </button>
+       
 
         <h1 className="header-title">{project.name}</h1>
         <Image className="imgproject" src={project.img} alt={project.name} width={500} height={300} />

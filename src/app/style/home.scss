@@ -1,6 +1,4 @@
-
 @use "./variable.scss";
-
 
 .header-container {
   display: flex;
@@ -15,7 +13,7 @@
 }
 
 .header-title {
-    text-align: center;
+  text-align: center;
   font-size: 3em;
   text-shadow: 1px 0px 1px, 0px 1px 1px black, 2px 1px 1px black,
     1px 2px 1px black, 3px 2px 1px black, 2px 3px 1px black, 4px 3px 1px black,
@@ -35,25 +33,33 @@
 }
 
 .nav-list li {
-  padding: 15px;
-  border-radius: 10px;
-  cursor: pointer;
+  padding: 10px 20px;
+  margin: 10px;
+  margin-top: 30px;
+  font-size: 1.2em;
   color: #ffd700;
-  font-weight: bolder;
+  background-color: aliceblue;
+  border: none;
+  border-radius: 10px;
   box-shadow: inset -1px 3px 8px 5px gold, 2px 1px 10px 0px black,
     5px 5px 15px 5px black;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease,
+    box-shadow 0.3s ease;
+  font-family: variable.$font-text;
   text-shadow: black 1px 1px;
-  background-color: aliceblue;
-  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
 .nav-list li:hover {
-  transform: scale(1.1); /* Zoom léger */
-  background-color: #ffd700; /* Inverser les couleurs */
+  transform: scale(1.05); /* Zoom léger */
+  background-color: #ffd700; /* Inverser la couleur de fond */
   color: black;
-  text-shadow: aliceblue 1px; /* Met en valeur les lettres */
+  text-shadow: aliceblue 1px 1px; /* Met en valeur les lettres */
+  
+  /* Inversion des couleurs du cadre */
+  box-shadow: inset -1px 3px 8px 5px black, 2px 1px 10px 0px gold,
+    5px 5px 15px 5px gold;
 }
-
 
 .nav-link {
   text-decoration: none;
@@ -64,17 +70,24 @@
   display: flex;
   flex-direction: row;
   margin-top: 50px;
+  flex-wrap: wrap; /* Permet aux éléments de se réorganiser */
+  justify-content: center; /* Centre le contenu */
 }
 
 .profil {
-  width: 350px;
-  height: auto ;
+  width: 100%;
+  max-width: 350px; /* Conserve la taille sur les écrans plus grands */
+  height: auto;
   margin: auto;
   border-radius: 20px;
-box-shadow: inset -1px 3px 8px 5px gold, 2px 1px 10px 0px black,
+  box-shadow: inset -1px 3px 8px 5px gold, 2px 1px 10px 0px black,
     5px 5px 15px 5px black;
 }
-.sub-title{text-shadow: black   1px 1px;}
+
+.sub-title {
+  text-shadow: black 1px 1px;
+}
+
 .description-container {
   position: relative;
   display: flex;
@@ -82,26 +95,25 @@ box-shadow: inset -1px 3px 8px 5px gold, 2px 1px 10px 0px black,
   align-items: center;
   justify-content: center;
   padding: 20px;
-  width: 43%;
-  margin-left: 80px;
+  width: 100%;
+  max-width: 43%; /* Ajuste la largeur maximale */
+  margin: auto; /* Centre le conteneur */
   box-shadow: inset -1px 3px 8px 5px gold, 2px 1px 10px 0px black,
     5px 5px 15px 5px black;
 }
-
-
 
 .description-container h2 {
   margin-bottom: 0;
   font-size: 1.5em;
   text-shadow: 1px 0px 1px, 0px 1px 1px black, 2px 1px 1px black,
-    1px 2px 1px black, 3px 2px 1px black, 2px 3px 1px black, 4px 3px 1px black,
+    1px 2px 1px black, 3px 1px 1px black, 2px 3px 1px black, 4px 3px 1px black,
     3px 4px 1px black, 5px 4px 1px black, 4px 5px 1px black, 6px 5px 1px #ffd700,
     5px 6px 1px #ffd700, 7px 6px 1px #ffd700;
 }
 
 .description-container h3 {
   text-shadow: 1px 0px 1px, 0px 1px 1px black, 2px 1px 1px black,
-    1px 2px 1px black, 3px 2px 1px black, 2px 3px 1px black, 4px 3px 1px black,
+    1px 2px 1px black, 3px 1px 1px black, 2px 3px 1px black, 4px 3px 1px black,
     3px 4px 1px black, 5px 4px 1px black, 4px 5px 1px black, 6px 5px 1px #ffd700,
     5px 6px 1px #ffd700, 7px 6px 1px #ffd700;
   margin-top: 0;
@@ -136,6 +148,7 @@ box-shadow: inset -1px 3px 8px 5px gold, 2px 1px 10px 0px black,
 
 .logo {
   width: 70px;
+  height: auto; /* Ajout de la hauteur auto pour rendre l'image responsive */
 }
 
 .logo-container {
@@ -143,6 +156,8 @@ box-shadow: inset -1px 3px 8px 5px gold, 2px 1px 10px 0px black,
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
+  flex-wrap: wrap; /* Permet aux logos de s'adapter sur plusieurs lignes si nécessaire */
+  max-width: 100%; /* S'assure que le conteneur ne dépasse pas la largeur de l'écran */
 }
 
 .skills-container ul {
@@ -161,10 +176,45 @@ box-shadow: inset -1px 3px 8px 5px gold, 2px 1px 10px 0px black,
 
 .footer-container {
   text-align: center;
-  p{color: #ffd700;}
+
+  p {
+    color: #ffd700;
+  }
 }
+
 .footer-container p {
   text-shadow: 1px 0px 1px, 0px 1px 1px black, 2px 1px 1px black,
     1px 2px 1px black, 3px 2px 1px black, 2px 3px 1px black, 4px 3px 1px black,
     3px 4px 1px black, 5px 4px 1px black, 4px 5px 1px black, 6px 5px 1px #ffd700,
-    5px 6px 1px #ffd700, 7px 6px 1px #ffd700;}
+    5px 6px 1px #ffd700, 7px 6px 1px #ffd700;
+}
+
+/* Media queries pour ajuster les tailles de police sur les petits écrans */
+@media (max-width: 768px) {
+  .header-title {
+    font-size: 2em; /* Réduit la taille de police */
+  }
+
+  .nav-list li {
+    font-size: 1.5em; /* Ajuste la taille de la police des éléments de navigation */
+  }
+
+  .description-container h2,
+  .description-container h3,
+  .description-container h4 {
+    font-size: 1.2em; /* Réduit la taille de la police des titres */
+  }
+
+  .content {
+    flex-direction: column; /* Change la direction en colonne sur les petits écrans */
+    align-items: center; /* Centre le contenu */
+  }
+
+  .profil,
+  .description-container {
+    width: 85%;
+    max-width: 90%; /* Rend les conteneurs plus larges sur les petits écrans */
+
+  }
+  .profil{margin-top: 40px;}
+}

@@ -5,26 +5,41 @@
   align-items: center;
   box-shadow: inset -1px 3px 8px 5px gold, 2px 1px 10px 0px black,
     5px 5px 15px 5px black;
-  width: 600px;
+  width: 600px; /* Largeur par défaut pour les grands écrans */
   margin: auto;
   margin-top: 50px;
   margin-bottom: 50px;
   border-radius: 20px;
   background-color: white;
+
+  /* Styles responsives */
+  @media (max-width: 768px) { /* Pour les écrans jusqu'à 768px */
+    width: 80%; /* Largeur de 80% */
+  }
 }
 
 .info-container li {
   list-style: none;
   display: flex;
   align-items: center;
-  font-size: 1.5rem;
+  font-size: 1.5rem; /* Taille de police par défaut */
   padding: 10px;
   color: #363d3d;
+
+  /* Styles responsives */
+  @media (max-width: 768px) { /* Pour les écrans jusqu'à 768px */
+    font-size: 1rem; /* Réduction de la taille de police sur mobile */
+  }
 }
 
 .imginfo {
   width: 50px;
   margin-right: 20px;
+
+  @media (max-width: 768px) { /* Pour les écrans jusqu'à 768px */
+    width: 40px; /* Réduction de la taille des images */
+    height: auto;
+  }
 }
 
 .info-container a {
@@ -41,6 +56,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%; /* Assurez-vous que le conteneur prend toute la largeur disponible */
+
+  /* Styles responsives */
+  @media (max-width: 768px) { /* Pour les écrans jusqu'à 768px */
+    width: 80%; /* Largeur de 80% pour le conteneur CV */
+  }
 }
 
 .cv-container h2 {
@@ -51,14 +72,30 @@
 }
 
 .cv {
-  width: 600px;
+  width: 600px; /* Largeur par défaut pour les grands écrans */
   box-shadow: inset -1px 3px 8px 5px gold, 2px 1px 10px 0px black,
     5px 5px 15px 5px black;
   border-radius: 10px;
+  display: flex; /* Ajout d'un flex pour centrer l'image */
+  justify-content: center; /* Centrer horizontalement */
+  align-items: center; /* Centrer verticalement */
+
+  /* Styles responsives */
+  @media (max-width: 768px) { /* Pour les écrans jusqu'à 768px */
+    width: 90%; /* Largeur de 90% pour l'image CV */
+  }
 }
 
 .cv-image {
+ /* Ajustez la largeur de l'image pour remplir le conteneur */
   transition: transform 0.3s ease; /* Transition pour un effet fluide */
+
+  /* Pas de zoom sur mobile */
+  @media (max-width: 768px) {
+    transform: scale(1); /* Pas de zoom sur les petits écrans */
+    width: 95%;
+    margin-right: -80px;
+  }
 }
 
 .cv-image:hover {
@@ -79,8 +116,16 @@
   cursor: pointer;
   transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease,
     box-shadow 0.3s ease;
-    font-family: variable.$font-text;
+  font-family: variable.$font-text;
   text-shadow: black 1px 1px;
+  text-decoration: none;
+
+  /* Pour centrer le bouton */
+  @media (max-width: 768px) {
+    width: 100%; /* Optionnel : rend le bouton plein écran sur mobile */
+   
+    margin-left: 40px;
+  }
 }
 
 /* Assurez-vous d'inclure les styles de survol */
