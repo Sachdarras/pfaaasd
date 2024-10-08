@@ -1,0 +1,113 @@
+@use "./variable.scss"; // Assurez-vous que le chemin est correct
+
+.project-carousel {
+
+  display: flex; /* Aligne les images en ligne */
+  justify-content: center; /* Aligne les images en centrage horizontal */
+  gap: 20px; /* Espacement entre les images */
+ 
+
+ 
+  padding: 10px 0; /* Espacement autour de la réglette */
+  margin-bottom: 20px; /* Espace entre la réglette et le contenu du projet */
+margin-top: 40px;
+}
+
+
+
+.carousel-item {
+  margin: 0 10px; /* Espacement entre les images */
+  cursor: pointer; /* Indique que c'est cliquable */
+  transition: transform 0.2s ease; /* Animation pour le zoom */
+}
+
+.carousel-item:hover {
+  transform: scale(1.05); /* Zoom léger au survol */
+}
+
+.carousel-image {
+  width: 250px; /* Largeur de l'image */
+  height: 100px; /* Hauteur de l'image */
+  border-radius: 10px; /* Arrondi des bords */box-shadow: inset -1px 3px 8px 5px gold, 2px 1px 10px 0px black,
+    5px 5px 15px 5px black;
+}
+
+
+.project-detail-container {
+  width: auto;
+  max-width: 1000px; /* Largeur maximum de la page */
+  margin: 20px auto; /* Centrage de la page avec un espacement */
+  margin-top: 40px;
+  margin-bottom: 20px;
+  padding: 20px; /* Espacement intérieur */
+  background-color: #f8f8f8; /* Couleur de fond */
+  border-radius: 20px; /* Arrondi des bords */
+   box-shadow: inset -1px 3px 8px 5px gold, 2px 1px 10px 0px black,
+    5px 5px 15px 5px black;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    flex-direction: column;
+    p{font-family: variable.$font-text;
+    font-size: 24px;
+    margin-top: 20px;;
+}
+}
+.imgproject {
+  width: 90%;
+  border-radius: 20px;
+  box-shadow: inset -1px 3px 8px 5px gold, 2px 1px 10px 0px black,
+    5px 5px 15px 5px black;
+}
+.project-link {
+  display: inline-block; 
+  margin: 10px 0; 
+  padding: 10px 15px; 
+  font-size: 1.5em; 
+  color: #fff; 
+  background-color: #ffd700; 
+  border: none; 
+  border-radius: 10px; 
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); 
+  text-decoration: none; 
+  transition: background-color 0.3s ease, transform 0.3s ease; 
+text-shadow: black 2px 1px;
+  ul {
+    list-style: none; /* Assurez-vous que cela est ici pour cibler le ul à l'intérieur de .project-link */
+    padding: 0; /* Supprime le remplissage */
+    margin: 0; /* Supprime la marge */
+  }
+}
+
+
+.project-link:hover {
+  background-color: #333; /* Change la couleur de fond au survol */
+  transform: scale(1.05); /* Zoom léger au survol */
+}
+.skilltitle{   text-align: center;
+  font-size: 2em;
+  font-family: variable.$font-text;
+  text-shadow: 1px 0px 1px, 0px 1px 1px black, 2px 1px 1px black,
+    1px 2px 1px black, 3px 2px 1px black, 2px 3px 1px black, 4px 3px 1px black,
+    3px 4px 1px black, 5px 4px 1px black, 4px 5px 1px black, 6px 5px 1px #ffd700,
+    5px 6px 1px #ffd700, 7px 6px 1px #ffd700;}
+.techno-container {
+  display: flex; /* Utilise Flexbox pour aligner les icônes */
+  justify-content:space-evenly; /* Centre les icônes horizontalement */
+  flex-direction: row;
+  align-items: center; /* Centre les icônes verticalement */
+  margin: 20px 0; /* Espacement autour de la section des technologies */
+}
+
+.tech-icon {
+    width: 70px; /* Taille des icônes */
+  margin: 0 10px; /* Espacement entre les icônes */
+  transition: transform 0.2s ease; /* Animation pour le zoom */
+}
+
+.tech-icon:hover {
+  transform: scale(1.1); /* Zoom léger au survol */
+}
+
+/* Styles supplémentaires pour l'uniformité */
+

@@ -1,0 +1,112 @@
+@use "./variable.scss"; // Assurez-vous que le chemin est correct
+
+.page-container {
+  width: 100%;
+  max-width: 1200px; /* Limite de largeur pour un affichage agréable */
+  margin: 0 auto; /* Centrage de la page */
+  padding: 20px; /* Espacement intérieur */
+  background-color: #f8f8f8; /* Couleur de fond de la page */
+}
+
+/* Conteneur du carrousel */
+.projectcard-container {
+  width: 100%;
+  overflow: hidden;
+  margin: 20px auto; /* Espacement autour du carrousel */
+}
+
+/* Carrousel */
+.carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 20px; /* Ajout d'un arrondi au carrousel */
+}
+
+/* Contenu du carrousel */
+.carousel-inner {
+  display: flex;
+  transition: transform 1s ease;
+}
+
+/* Projets dans le carrousel */
+.project {
+  text-align: center;
+  margin: 20px auto;
+  padding: 20px;
+  width: 90%;
+  box-shadow: inset -1px 3px 8px 5px gold, 2px 1px 10px 0px black,
+    5px 5px 15px 5px black;
+  background: whitesmoke;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column; /* Alignement vertical */
+  align-items: center; /* Centrage horizontal */
+}
+
+/* Image du projet */
+.img-project {
+  width: 60%;
+  border-radius: 20px;
+  box-shadow: inset -1px 3px 8px 5px gold, 2px 1px 10px 0px black,
+    5px 5px 15px 5px black;
+}
+
+/* Titre du projet */
+.project h4 {
+  font-size: 2rem;
+  text-shadow: 1px 0px 1px, 0px 1px 1px black, 2px 1px 1px black,
+    1px 2px 1px black, 3px 2px 1px black, 2px 3px 1px black, 4px 3px 1px black,
+    3px 4px 1px black, 5px 4px 1px black, 6px 5px 1px #ffd700,
+    5px 6px 1px #ffd700, 7px 6px 1px #ffd700;
+  margin: 10px 0; /* Espacement autour du titre */
+}
+
+/* Bouton pour voir plus */
+.view-more-button {
+  padding: 10px 20px;
+  margin:10px;
+  margin-top: 30px;
+  font-size: 1.2em;
+  color: #ffd700;
+  background-color: aliceblue;
+  border: none;
+  border-radius: 10px;
+  box-shadow: inset -1px 3px 8px 5px gold, 2px 1px 10px 0px black,
+    5px 5px 15px 5px black;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease,
+    box-shadow 0.3s ease;
+    font-family: variable.$font-text;
+ 
+}
+
+.view-more-button:hover {
+  transform: scale(1.05); /* Zoom léger */
+  background-color: #ffd700; /* Inverser la couleur de fond */
+  color: black;
+  text-shadow: aliceblue 1px 1px; /* Met en valeur les lettres */
+  
+  /* Inversion des couleurs du cadre */
+  box-shadow: inset -1px 3px 8px 5px black, 2px 1px 10px 0px gold,
+    5px 5px 15px 5px gold;
+}
+
+/* Contrôles du carrousel */
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.carousel-control.next {
+  right: -10px; /* Positionne le bouton "suivant" à l'extérieur du cadre */
+}
+
+.carousel-control.prev {
+  left: -10px; /* Positionne le bouton "précédent" à l'extérieur du cadre */
+}

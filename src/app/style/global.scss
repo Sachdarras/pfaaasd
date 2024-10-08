@@ -1,5 +1,7 @@
 @use "./variable.scss";
 @import './home.scss';
+@import"./projet.scss";
+@import "./oneproject.scss";
 
 body {
   border-top: 10px groove;
@@ -8,5 +10,18 @@ body {
   border-left: 10px groove;
  border-color: variable.$border-color;
   box-sizing: border-box;
-  background: #3a3e40;
+  background: whitesmoke;
+}
+h1,
+h2,
+h3,
+h4 {
+font-family: variable.$font-title; // Accès via namespace
+  color: variable.$font-color-title;
+}
+
+p,
+li {
+  font-family: variable.$font-text;
+  color: variable.$font-color-text;
 }

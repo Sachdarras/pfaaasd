@@ -1,4 +1,4 @@
-import "./style/global.scss"
+
 import Description from "./comoponents/Description";
 import Skills from "./comoponents/Skills";
 
