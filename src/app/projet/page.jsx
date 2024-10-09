@@ -1,5 +1,5 @@
 // app/page.jsx ou app/projets/page.jsx
-import ProjectCard from "../comoponents/ProjectCard"; // Assure-toi que le chemin est correct
+import ProjectCard from "../comoponents/ProjectCard"; // Corrige le chemin d'importation
 
 export default function Home() {
   return (

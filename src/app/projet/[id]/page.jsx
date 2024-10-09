@@ -1,17 +1,17 @@
-"use client"; // Ensure this is a client component
+"use client"; // Assurez-vous qu'il s'agit d'un composant client
 
-import projects from "../../data/projectData"; // Adjust path if necessary
+import projects from "../../data/projectData"; // Ajustez le chemin si nécessaire
 import Image from "next/image";
-import { useRouter } from "next/navigation"; // Import the useRouter hook
+import { useRouter } from "next/navigation"; // Importer le hook useRouter
 
 function ProjectPage({ params }) {
-  const { id } = params; // Retrieve the ID from parameters
-  const router = useRouter(); // Use the router for navigation
+  const { id } = params; // Récupérer l'ID des paramètres
+  const router = useRouter(); // Utiliser le router pour la navigation
 
-  // Find the corresponding project by ID
+  // Trouver le projet correspondant par ID
   const project = projects.find((proj) => proj.id === Number(id));
 
-  // Display an error message if the project is not found
+  // Afficher un message d'erreur si le projet n'est pas trouvé
   if (!project) {
     return <div>Projet non trouvé</div>;
   }
@@ -27,17 +27,21 @@ function ProjectPage({ params }) {
               width={100}
               height={60}
               className="carousel-image"
-              onClick={() => router.push(`/projet/${proj.id}`)} // Navigate to the corresponding project
+              onClick={() => router.push(`/projet/${proj.id}`)} // Naviguer vers le projet correspondant
             />
           </div>
         ))}
       </div>
 
       <div className="project-detail-container">
-       
-
         <h1 className="header-title">{project.name}</h1>
-        <Image className="imgproject" src={project.img} alt={project.name} width={500} height={300} />
+        <Image 
+          className="imgproject" 
+          src={project.img} 
+          alt={project.name} 
+          width={500} 
+          height={300} 
+        />
         <p>{project.description}</p>
         <h2 className="skilltitle">Compétences</h2>
         <div className="techno-container">

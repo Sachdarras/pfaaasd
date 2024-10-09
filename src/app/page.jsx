@@ -1,16 +1,16 @@
+import Description from "../app/comoponents/Description"; // Correction du chemin
+import Skills from "../app/comoponents/Skills"; // Correction du chemin
 
-import Description from "./comoponents/Description";
-import Skills from "./comoponents/Skills";
-
-function Home () {
-    return ( <>
-    <div className="homepage-container">
-    <h1 className="header-title">Mon Portefolio</h1>
-    <Description/>
-    <Skills/>
-  
-    </div>
-    </> );
+function Home() {
+  return (
+    <>
+      <div className="homepage-container">
+        <h1 className="header-title">Mon Portefolio</h1>
+        <Description />
+        <Skills />
+      </div>
+    </>
+  );
 }
 
-export default Home ;
+export default Home;

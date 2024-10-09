@@ -1,9 +1,8 @@
 "use client";
-
 import { useState } from "react";
 import Image from "next/image";
-import projects from "../data/projectData"; // Ensure the path is correct
-import { useRouter } from "next/navigation"; // Make sure to use the correct import
+import projects from "../data/projectData"; // Assurez-vous que le chemin est correct
+import { useRouter } from "next/navigation"; // Assurez-vous d'utiliser l'importation correcte
 
 function ProjectCard() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -33,8 +32,8 @@ function ProjectCard() {
                 className="img-project"
                 src={projects[currentIndex].img}
                 alt={projects[currentIndex].name}
-                width={500} // Adjust image width
-                height={300} // Adjust image height
+                width={500} // Ajustez la largeur de l'image
+                height={300} // Ajustez la hauteur de l'image
               />
               <button onClick={handleViewMore} className="view-more-button">
                 Détails

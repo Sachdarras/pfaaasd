@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import Nav from './comoponents/Nav'
-import Footer from './comoponents/Footer'
+import Nav from '../../src/app/comoponents/Nav'
+import Footer from '../../src/app/comoponents/Footer';
 import "./style/global.scss"
 export default function RootLayout({ children }) {
   return (
