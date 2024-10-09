@@ -1,0 +1,133 @@
+/* src/styles/Nav.css */
+
+.nav-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around; /* Changer space-evenly à space-around */
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 10px;
+  font-size: 1.5em;
+}
+
+.nav-list li {
+  padding: 10px 20px;
+  margin: 10px;
+  margin-top: 30px;
+  font-size: 1.2em;
+  color: #ffd700;
+  background-color: aliceblue;
+  border: none;
+  border-radius: 10px;
+  box-shadow: inset -1px 3px 8px 5px gold, 2px 1px 10px 0px black,
+    5px 5px 15px 5px black;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease,
+    box-shadow 0.3s ease;
+  font-family: variable.$font-text;
+  text-shadow: black 1px 1px;
+}
+
+.nav-list li:hover {
+  transform: scale(1.05); /* Zoom léger */
+  background-color: #ffd700; /* Inverser la couleur de fond */
+  color: black;
+  text-shadow: aliceblue 1px 1px; /* Met en valeur les lettres */
+  
+  /* Inversion des couleurs du cadre */
+  box-shadow: inset -1px 3px 8px 5px black, 2px 1px 10px 0px gold,
+    5px 5px 15px 5px gold;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.burger {
+  display: none; /* Masquer le menu burger par défaut */
+  cursor: pointer;
+}
+
+.nav-modal {
+  display: none; /* Masquer le menu modal par défaut */
+}
+
+.nav-modal.active {
+  display: block; /* Afficher le menu lorsque actif */
+  background-color: rgba(255, 255, 255, 0.9); /* Couleur de fond avec transparence */
+}
+
+.close-button {
+  display: none; /* Masquer la croix par défaut */
+  position: absolute; /* Positionner en haut à droite */
+  top: 10px; /* Ajuste selon le design souhaité */
+  right: 10px; /* Ajuste selon le design souhaité */
+  background: transparent; /* Fond transparent */
+  border: none; /* Pas de bordure */
+  color: red; /* Couleur rouge pour la croix */
+  font-size: 2em; /* Taille de la croix */
+  cursor: pointer; /* Curseur de pointeur */
+}
+
+/* Styles pour le burger */
+@media (max-width: 768px) {
+  .burger {
+    display: flex; /* Afficher le burger en mode mobile/tablette */
+    flex-direction: column; /* Aligner les lignes verticalement */
+    justify-content: space-between; /* Espacement entre les lignes */
+    width: 40px; /* Largeur du burger */
+    height: 30px; /* Hauteur du burger */
+    margin-left: auto; /* Aligner à droite */
+  }
+
+  .nav-list {
+    flex-direction: column; /* Changer la direction des éléments en colonne */
+    align-items: center; /* Centrer les éléments */
+  }
+
+  .nav-modal {
+    position: absolute; /* Positionner le menu modal */
+    top: 60px; /* Ajuster selon l'emplacement du nav */
+    right: 0;
+    width: 100%; /* Largeur complète */
+    background-color: rgba(255, 255, 255, 0.9); /* Couleur de fond avec transparence */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Ajouter une ombre */
+  }
+
+  .nav-list li {
+    font-size: 1.5em; /* Ajuste la taille de la police des éléments de navigation */
+  }
+}
+
+/* Styles pour desktop */
+@media (min-width: 769px) {
+  .burger {
+    display: none; /* Masquer le burger en mode desktop */
+  }
+
+  .nav-modal {
+    display: block; /* Afficher le menu de navigation par défaut sur desktop */
+    position: relative; /* Position normale pour desktop */
+    top: auto;
+    right: auto;
+    width: auto; /* Largeur automatique */
+    background-color: transparent; /* Fond transparent pour le menu desktop */
+    box-shadow: none; /* Pas d'ombre */
+  }
+
+  .nav-list {
+    flex-direction: row; /* Rester en ligne sur desktop */
+    justify-content: space-around; /* Centrer le menu avec espacement autour */
+  }
+
+  .nav-list li {
+    margin-top: 0; /* Enlever la marge supérieure en desktop */
+  }
+}
+
+/* Afficher la croix quand le menu est actif */
+.nav-modal.active .close-button {
+  display: block; /* Afficher la croix lorsque le menu est actif */
+}

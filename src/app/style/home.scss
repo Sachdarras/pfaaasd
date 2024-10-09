@@ -21,50 +21,7 @@
     5px 6px 1px #ffd700, 7px 6px 1px #ffd700;
 }
 
-.nav-list {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-  list-style: none;
-  padding: 0;
-  margin: 10px;
-  font-size: 1.5em;
-}
 
-.nav-list li {
-  padding: 10px 20px;
-  margin: 10px;
-  margin-top: 30px;
-  font-size: 1.2em;
-  color: #ffd700;
-  background-color: aliceblue;
-  border: none;
-  border-radius: 10px;
-  box-shadow: inset -1px 3px 8px 5px gold, 2px 1px 10px 0px black,
-    5px 5px 15px 5px black;
-  cursor: pointer;
-  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease,
-    box-shadow 0.3s ease;
-  font-family: variable.$font-text;
-  text-shadow: black 1px 1px;
-}
-
-.nav-list li:hover {
-  transform: scale(1.05); /* Zoom léger */
-  background-color: #ffd700; /* Inverser la couleur de fond */
-  color: black;
-  text-shadow: aliceblue 1px 1px; /* Met en valeur les lettres */
-  
-  /* Inversion des couleurs du cadre */
-  box-shadow: inset -1px 3px 8px 5px black, 2px 1px 10px 0px gold,
-    5px 5px 15px 5px gold;
-}
-
-.nav-link {
-  text-decoration: none;
-  color: inherit;
-}
 
 .content {
   display: flex;
@@ -104,7 +61,7 @@
 
 .description-container h2 {
   margin-bottom: 0;
-  font-size: 1.5em;
+  font-size: 2em;
   text-shadow: 1px 0px 1px, 0px 1px 1px black, 2px 1px 1px black,
     1px 2px 1px black, 3px 1px 1px black, 2px 3px 1px black, 4px 3px 1px black,
     3px 4px 1px black, 5px 4px 1px black, 4px 5px 1px black, 6px 5px 1px #ffd700,
@@ -118,17 +75,18 @@
     5px 6px 1px #ffd700, 7px 6px 1px #ffd700;
   margin-top: 0;
   margin-bottom: 5px;
-  font-size: 1.5em;
+  font-size: 1.8em;
 }
 
 .description-container h4 {
   margin-top: 0;
-  font-size: 1.5em;
+  font-size: 1.7em;
+  
 }
 
 .description-container p {
   margin-top: 0;
-  font-size: 1.25em;
+  font-size: 1.5em;
 }
 
 .skills-container {
@@ -195,10 +153,7 @@
     font-size: 2em; /* Réduit la taille de police */
   }
 
-  .nav-list li {
-    font-size: 1.5em; /* Ajuste la taille de la police des éléments de navigation */
-  }
-
+ 
   .description-container h2,
   .description-container h3,
   .description-container h4 {
