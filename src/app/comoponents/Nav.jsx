@@ -2,9 +2,11 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa'; // Importer les icônes pour le menu
+import projects from '../data/projectData'; // Importer les données des projets
 
 function Nav() {
   const [isOpen, setIsOpen] = useState(false);
+  const [randomProjectId, setRandomProjectId] = useState(null); // État pour l'ID du projet aléatoire
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -12,6 +14,18 @@ function Nav() {
 
   const closeMenu = () => {
     setIsOpen(false); // Ferme le menu
+  };
+
+  // Fonction pour générer un ID aléatoire parmi les projets existants
+  const getRandomProjectId = () => {
+    const randomIndex = Math.floor(Math.random() * projects.length);
+    return projects[randomIndex].id; // Retourne l'ID du projet aléatoire
+  };
+
+  // Fonction pour gérer le clic sur le lien Projet
+  const handleProjectClick = () => {
+    const newProjectId = getRandomProjectId();
+    setRandomProjectId(newProjectId); // Met à jour l'état avec un nouvel ID aléatoire
   };
 
   return (
@@ -31,7 +45,7 @@ function Nav() {
             </Link>
           </li>
           <li>
-            <Link href="/projet" className="nav-link" onClick={closeMenu}>
+            <Link href={`/projet/${randomProjectId || getRandomProjectId()}`} className="nav-link" onClick={() => { handleProjectClick(); closeMenu(); }}>
               Projet
             </Link>
           </li>

@@ -1,13 +1,13 @@
 import Image from 'next/image';
-import skills from "../data/skillsdata"; // Assurez-vous que ce chemin est correct
+import skills from "../data/technos"; // Assurez-vous que ce chemin est correct
 
 function Skills() {
   return (
     <div className="skills-container">
       <h2>Mes Compétences</h2>
       <ul className="logo-container">
-        {skills.map((skill, index) => (
-          <li key={index}>
+        {skills.map((skill) => (
+          <li key={skill.id}>
             <Image
               className="logo"
               src={skill.img}

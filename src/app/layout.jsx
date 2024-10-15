@@ -8,8 +8,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="fr">
       <Head>
-        <link rel="icon" href="/favicon.ico" />
-        {/* Ajoutez d'autres liens ou métadonnées ici si nécessaire */}
+        <link rel="icon" href="./public/assets/favicon.ico" />
+     
       </Head>
       <body>
         <div className="header-container">

@@ -1,6 +1,7 @@
 "use client"; // Assurez-vous qu'il s'agit d'un composant client
 
 import projects from "../../data/projectData"; // Ajustez le chemin si nécessaire
+import skillsData from "../../data/technos"; // Importation des compétences
 import Image from "next/image";
 import { useRouter } from "next/navigation"; // Importer le hook useRouter
 
@@ -45,16 +46,19 @@ function ProjectPage({ params }) {
         <p>{project.description}</p>
         <h2 className="skilltitle">Compétences</h2>
         <div className="techno-container">
-          {project.techno.map((tech, index) => (
-            <Image
-              key={index}
-              src={tech}
-              alt="technology icon"
-              className="tech-icon"
-              width={50}
-              height={50}
-            />
-          ))}
+          {project.techno.map((techId) => {
+            const tech = skillsData.find(skill => skill.id === techId);
+            return tech ? (
+              <Image
+                key={tech.id}
+                src={tech.img}
+                alt={tech.name}
+                className="tech-icon"
+                width={50}
+                height={50}
+              />
+            ) : null;
+          })}
         </div>
         <ul>
           <li>
