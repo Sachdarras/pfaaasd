@@ -1,0 +1,22 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+model Description {
+  id        Int      @id @default(autoincrement())
+  name      String
+  title     String
+  subtitle  String
+  content   String @db.LongText // Utilisez LongText pour du texte long
+  image     String @db.LongText //
+}
+
+model Skill {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  image String
+}

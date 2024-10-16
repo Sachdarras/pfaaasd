@@ -1,5 +1,5 @@
-import Description from "../app/comoponents/Description"; // Correction du chemin
-import Skills from "../app/comoponents/Skills"; // Correction du chemin
+import Description from "./components/Description"; // Correction du chemin
+import Skills from "./components/Skills"; // Correction du chemin
 
 function Home() {
   return (

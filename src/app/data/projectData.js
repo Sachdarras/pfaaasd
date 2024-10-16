@@ -60,5 +60,4 @@ const projects = [
     techno: [1, 2, 3, 4, 5, 7, 8, 11, 12, 9, 13]
   },
 ];
-
-module.exports = projects;
+export default projects;

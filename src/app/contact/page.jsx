@@ -1,4 +1,4 @@
-import Info from "../../app/comoponents/Info"; // Correction du chemin d'importation
+import Info from "../components/Info"; // Correction du chemin d'importation
 
 function Contact() {
   return (
