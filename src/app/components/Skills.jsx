@@ -1,4 +1,5 @@
-"use client"
+"use client"; // Assurez-vous que cette ligne est au début de votre fichier
+
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 

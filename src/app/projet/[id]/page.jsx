@@ -1,3 +1,4 @@
+
 "use client"; // Assurez-vous qu'il s'agit d'un composant client
 
 import projects from "../../data/projectData"; // Ajustez le chemin si nécessaire

@@ -26,7 +26,7 @@ function Description() {
         ))}
       </div>
       <Image 
-        src="/assets/images/profil.jpg" // Assurez-vous que le chemin est correct
+        src={descriptions.length > 0 ? descriptions[0].image : '/assets/images/profil.jpg'} // Assurez-vous que le chemin est correct ou récupéré dynamiquement
         className="profil" 
         alt="profil" 
         width={150} 

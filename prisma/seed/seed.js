@@ -26,22 +26,22 @@ async function main() {
     console.log('La description existe déjà:', existingDescription);
   }
 
-  // Ajouter des compétences
+  // Ajouter des compétences avec un attribut order
   const skills = [
-    { name: "HTML", image: "/assets/skills/html-1.svg" },
-    { name: "CSS", image: "/assets/skills/css-3.svg" },
-    { name: "JavaScript", image: "/assets/skills/javascript-1.svg" },
-    { name: "Git", image: "/assets/skills/git-icon.svg" },
-    { name: "GitHub", image: "/assets/skills/github-icon-1.svg" },
-    { name: "Figma", image: "/assets/skills/figma-5.svg" },
-    { name: "NPM", image: "/assets/skills/npm.svg" },
-    { name: "Git Bash", image: "/assets/skills/git-bash.svg" },
-    { name: "Node.js", image: "/assets/skills/nodejs-1.svg" },
-    { name: "Leaflet", image: "/assets/skills/leaflet-seeklogo.svg" },
-    { name: "React", image: "/assets/skills/react-2.svg" },
-    { name: "Sass", image: "/assets/skills/sass-1.svg" },
-    { name: "MySQL", image: "/assets/skills/mysql.png" },
-    { name: "Three.js", image: "/assets/skills/three-js-icon.svg" },
+    { name: "HTML", image: "/assets/skills/html-1.svg", order: 1 },
+    { name: "CSS", image: "/assets/skills/css-3.svg", order: 2 },
+    { name: "JavaScript", image: "/assets/skills/javascript-1.svg", order: 3 },
+    { name: "Git", image: "/assets/skills/git-icon.svg", order: 4 },
+    { name: "GitHub", image: "/assets/skills/github-icon-1.svg", order: 5 },
+    { name: "Figma", image: "/assets/skills/figma-5.svg", order: 6 },
+    { name: "NPM", image: "/assets/skills/npm.svg", order: 7 },
+    { name: "Git Bash", image: "/assets/skills/git-bash.svg", order: 8 },
+    { name: "Node.js", image: "/assets/skills/nodejs-1.svg", order: 9 },
+    { name: "Leaflet", image: "/assets/skills/leaflet-seeklogo.svg", order: 10 },
+    { name: "React", image: "/assets/skills/react-2.svg", order: 11 },
+    { name: "Sass", image: "/assets/skills/sass-1.svg", order: 12 },
+    { name: "MySQL", image: "/assets/skills/mysql.png", order: 13 },
+    { name: "Three.js", image: "/assets/skills/three-js-icon.svg", order: 14 },
   ];
 
   for (const skill of skills) {
@@ -52,7 +52,11 @@ async function main() {
     // Créer une compétence seulement si elle n'existe pas déjà
     if (!existingSkill) {
       const createdSkill = await prisma.skill.create({
-        data: skill,
+        data: {
+          name: skill.name,
+          image: skill.image,
+          order: skill.order, // Ajout de l'ordre ici
+        },
       });
       console.log('Compétence ajoutée:', createdSkill);
     } else {
