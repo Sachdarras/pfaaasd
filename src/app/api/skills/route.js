@@ -14,7 +14,7 @@ export async function GET() {
     return NextResponse.json(skills);
   } catch (error) {
     console.error('Erreur lors de la récupération des compétences:', error);
-    return NextResponse.error();
+    return NextResponse.json({ error: 'Erreur lors de la récupération des compétences' }, { status: 500 });
   }
 }
 
@@ -33,7 +33,7 @@ export async function POST(req) {
     return NextResponse.json(newSkill);
   } catch (error) {
     console.error('Erreur lors de la création de la compétence:', error);
-    return NextResponse.error();
+    return NextResponse.json({ error: 'Erreur lors de la création de la compétence' }, { status: 500 });
   }
 }
 
@@ -45,7 +45,7 @@ export async function PATCH(req) {
     await Promise.all(
       skillsUpdate.map(({ id, order }) =>
         prisma.skill.update({
-          where: { id: parseInt(id) },
+          where: { id: parseInt(id, 10) },
           data: { order },
         })
       )
@@ -53,6 +53,6 @@ export async function PATCH(req) {
     return NextResponse.json({ message: 'Ordre mis à jour avec succès' });
   } catch (error) {
     console.error('Erreur lors de la mise à jour de l\'ordre:', error);
-    return NextResponse.error();
+    return NextResponse.json({ error: 'Erreur lors de la mise à jour de l\'ordre' }, { status: 500 });
   }
 }

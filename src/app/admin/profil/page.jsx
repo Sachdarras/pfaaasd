@@ -21,13 +21,27 @@ const ProfilAdmin = () => {
   const [editingSkillId, setEditingSkillId] = useState(null);
 
   useEffect(() => {
+    // Récupération des descriptions
     fetch('/api/description')
-      .then((res) => res.json())
-      .then((data) => setDescriptions(data));
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Erreur lors de la récupération des descriptions');
+        }
+        return res.json();
+      })
+      .then((data) => setDescriptions(data))
+      .catch((error) => console.error('Erreur:', error));
 
+    // Récupération des compétences
     fetch('/api/skills')
-      .then((res) => res.json())
-      .then((data) => setSkills(data));
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Erreur lors de la récupération des compétences');
+        }
+        return res.json();
+      })
+      .then((data) => setSkills(data))
+      .catch((error) => console.error('Erreur:', error));
   }, []);
 
   const handleChange = (e) => {
@@ -169,14 +183,12 @@ const ProfilAdmin = () => {
   };
 
   return (
-    <> <nav className='navadmin'>
-          <Link href="/admin">Retour à l'Admin</Link>
-        </nav>
+    <>
+      <nav className='navadmin'>
+        <Link href="/admin">Retour à l'Admin</Link>
+      </nav>
       <div className="admin-container">
         <h1>Profil - Gérer les Descriptions</h1>
-        
-        {/* Lien de retour vers la page admin */}
-       
 
         <h2>Liste des Descriptions</h2>
         <ul>
@@ -234,4 +246,3 @@ const ProfilAdmin = () => {
 };
 
 export default ProfilAdmin;
-
