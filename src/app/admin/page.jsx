@@ -10,6 +10,7 @@ const Admin = () => {
       {/* Lien vers la page de profil */}
       <nav>
         <Link href="/admin/profil">Profil</Link>
+        <Link href="/admin/projet">Projet</Link>
       </nav>
     </div>
   );
