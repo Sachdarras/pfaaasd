@@ -13,6 +13,7 @@ export async function GET(req) {
       headers: { 'Content-Type': 'application/json' },
     });
   } catch (error) {
+    console.error('Erreur lors de la récupération des projets:', error);
     return new Response(JSON.stringify({ error: 'Erreur lors de la récupération des projets.' }), {
       status: 500,
     });
@@ -31,6 +32,7 @@ export async function POST(req) {
       headers: { 'Content-Type': 'application/json' },
     });
   } catch (error) {
+    console.error('Erreur lors de la création du projet:', error);
     return new Response(JSON.stringify({ error: 'Erreur lors de la création du projet.' }), {
       status: 500,
     });

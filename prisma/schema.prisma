@@ -16,14 +16,6 @@ model Description {
   image   String @db.LongText
 }
 
-model Skill {
-  id    Int    @id @default(autoincrement())
-  name  String @unique
-  image String
-  order Int 
-  projects Project[] @relation("ProjectSkill")
-}
-
 model Project {
   id          Int      @id @default(autoincrement())
   name        String   @unique
@@ -32,4 +24,12 @@ model Project {
   lien        String
   repo        String
   skills     Skill[]  @relation("ProjectSkill")
+}
+
+model Skill {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  image String
+  order Int 
+  projects Project[] @relation("ProjectSkill")
 }

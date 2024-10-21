@@ -21,7 +21,7 @@ function ProjectPage({ params }) {
         // Récupérer le projet spécifique par son ID via l'API
         const res = await fetch(`/api/projects/${id}`);
         const data = await res.json();
-        
+
         if (res.ok) {
           setProject(data); // Assurez-vous que les données existent
           setSkills(data.skills || []); // Assurez-vous que les compétences existent, sinon un tableau vide
