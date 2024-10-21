@@ -3,82 +3,56 @@ import { NextResponse } from 'next/server';
 
 const prisma = new PrismaClient();
 
-export async function GET(req, { params }) {
+// Récupère toutes les compétences
+export async function GET() {
   try {
-    if (params?.id) {
-      const skill = await prisma.skill.findUnique({
-        where: { id: Number(params.id) },
-      });
-      if (!skill) {
-        return NextResponse.json({ error: 'Compétence non trouvée' }, { status: 404 });
-      }
-      return NextResponse.json(skill);
-    } else {
-      const skills = await prisma.skill.findMany();
-      return NextResponse.json(skills);
-    }
+    const skills = await prisma.skill.findMany({
+      orderBy: {
+        order: 'asc', // Assurez-vous de trier par ordre
+      },
+    });
+    return NextResponse.json(skills);
   } catch (error) {
-    return NextResponse.json({ error: 'Erreur lors de la récupération des compétences' }, { status: 500 });
+    console.error('Erreur lors de la récupération des compétences:', error);
+    return NextResponse.error();
   }
 }
 
+// Crée une nouvelle compétence
 export async function POST(req) {
-  try {
-    const data = await req.json();
-    const newSkill = await prisma.skill.create({ data });
-    return NextResponse.json(newSkill, { status: 201 });
-  } catch (error) {
-    return NextResponse.json({ error: 'Erreur lors de la création de la compétence' }, { status: 500 });
-  }
-}
+  const { name, image } = await req.json();
 
-export async function PUT(req, { params }) {
-  const { id } = params || {};
   try {
-    const data = await req.json();
-    const updatedSkill = await prisma.skill.update({
-      where: { id: Number(id) },
-      data,
+    const newSkill = await prisma.skill.create({
+      data: {
+        name,
+        image,
+        order: 0, // Définissez l'ordre par défaut ici si nécessaire
+      },
     });
-    return NextResponse.json(updatedSkill);
+    return NextResponse.json(newSkill);
   } catch (error) {
-    return NextResponse.json({ error: 'Erreur lors de la mise à jour de la compétence' }, { status: 500 });
+    console.error('Erreur lors de la création de la compétence:', error);
+    return NextResponse.error();
   }
 }
 
-export async function DELETE(req, { params }) {
-  const { id } = params || {};
-  try {
-    await prisma.skill.delete({
-      where: { id: Number(id) },
-    });
-    return NextResponse.json({ message: 'Compétence supprimée avec succès' });
-  } catch (error) {
-    return NextResponse.json({ error: 'Erreur lors de la suppression de la compétence' }, { status: 500 });
-  }
-}
-
+// Met à jour l'ordre des compétences
 export async function PATCH(req) {
+  const skillsUpdate = await req.json();
+
   try {
-    const skillsOrder = await req.json();
-    if (!Array.isArray(skillsOrder)) {
-      return NextResponse.json({ error: 'L\'ordre des compétences doit être un tableau' }, { status: 400 });
-    }
-
-    const updates = skillsOrder.map(skill => {
-      if (!skill.id || skill.order === undefined) {
-        throw new Error('Chaque compétence doit avoir un ID et un ordre défini');
-      }
-      return prisma.skill.update({
-        where: { id: Number(skill.id) },
-        data: { order: skill.order },
-      });
-    });
-
-    await Promise.all(updates);
-    return NextResponse.json({ message: 'L\'ordre des compétences a été mis à jour avec succès' });
+    await Promise.all(
+      skillsUpdate.map(({ id, order }) =>
+        prisma.skill.update({
+          where: { id: parseInt(id) },
+          data: { order },
+        })
+      )
+    );
+    return NextResponse.json({ message: 'Ordre mis à jour avec succès' });
   } catch (error) {
-    console.error('Erreur lors de la mise à jour de l\'ordre des compétences:', error.message);
-    return NextResponse.json({ error: `Erreur lors de la mise à jour de l'ordre des compétences: ${error.message}` }, { status: 500 });
+    console.error('Erreur lors de la mise à jour de l\'ordre:', error);
+    return NextResponse.error();
   }
 }

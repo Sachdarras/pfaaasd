@@ -12,7 +12,7 @@ async function main() {
     image: "/assets/images/profil.jpg",
   };
 
-  const existingDescription = await prisma.description.findFirst({
+  const existingDescription = await prisma.description.findUnique({
     where: { name: descriptionData.name },
   });
 
@@ -26,25 +26,25 @@ async function main() {
     console.log('La description existe déjà:', existingDescription);
   }
 
-  // Ajouter des compétences avec un attribut order
-  const skills = [
-    { name: "HTML", image: "/assets/skills/html-1.svg", order: 1 },
-    { name: "CSS", image: "/assets/skills/css-3.svg", order: 2 },
-    { name: "JavaScript", image: "/assets/skills/javascript-1.svg", order: 3 },
-    { name: "Git", image: "/assets/skills/git-icon.svg", order: 4 },
-    { name: "GitHub", image: "/assets/skills/github-icon-1.svg", order: 5 },
-    { name: "Figma", image: "/assets/skills/figma-5.svg", order: 6 },
-    { name: "NPM", image: "/assets/skills/npm.svg", order: 7 },
-    { name: "Git Bash", image: "/assets/skills/git-bash.svg", order: 8 },
-    { name: "Node.js", image: "/assets/skills/nodejs-1.svg", order: 9 },
-    { name: "Leaflet", image: "/assets/skills/leaflet-seeklogo.svg", order: 10 },
-    { name: "React", image: "/assets/skills/react-2.svg", order: 11 },
-    { name: "Sass", image: "/assets/skills/sass-1.svg", order: 12 },
-    { name: "MySQL", image: "/assets/skills/mysql.png", order: 13 },
-    { name: "Three.js", image: "/assets/skills/three-js-icon.svg", order: 14 },
+  // Ajouter des compétences avec un attribut order et image
+  const skillsData = [
+    { name: "HTML", image: "/assets/skills/html-1.svg" },
+    { name: "CSS", image: "/assets/skills/css-3.svg" },
+    { name: "JavaScript", image: "/assets/skills/javascript-1.svg" },
+    { name: "Git", image: "/assets/skills/git-icon.svg" },
+    { name: "GitHub", image: "/assets/skills/github-icon-1.svg" },
+    { name: "Figma", image: "/assets/skills/figma-5.svg" },
+    { name: "NPM", image: "/assets/skills/npm.svg" },
+    { name: "Git Bash", image: "/assets/skills/git-bash.svg" },
+    { name: "Node.js", image: "/assets/skills/nodejs-1.svg" },
+    { name: "Leaflet", image: "/assets/skills/leaflet-seeklogo.svg" },
+    { name: "React", image: "/assets/skills/react-2.svg" },
+    { name: "Sass", image: "/assets/skills/sass-1.svg" },
+    { name: "MySQL", image: "/assets/skills/mysql.png" },
+    { name: "Three.js", image: "/assets/skills/three-js-icon.svg" },
   ];
 
-  for (const skill of skills) {
+  for (const skill of skillsData) {
     const existingSkill = await prisma.skill.findUnique({
       where: { name: skill.name },
     });
@@ -55,7 +55,6 @@ async function main() {
         data: {
           name: skill.name,
           image: skill.image,
-          order: skill.order, // Ajout de l'ordre ici
         },
       });
       console.log('Compétence ajoutée:', createdSkill);
@@ -63,13 +62,88 @@ async function main() {
       console.log('La compétence existe déjà:', existingSkill);
     }
   }
+
+  // Ajouter des projets
+  const projects = [
+    {
+      name: "go past or back to Future",
+      img: "/assets/project/gopastorbacktofuture.png",
+      description: "Voyage Temporel Humoristique : une chronologie animée décalée de l'histoire de l'humanité, de l'âge de pierre aux voyages dans l'espace. Avec des personnages loufoques et des clins d'œil humoristiques, découvrez le passé de manière ludique et pédagogique !",
+      lien: "https://sachdarras.github.io/WCS-P1-Chronologie-Anim-e/",
+      repo: "https://github.com/Sachdarras/WCS-P1-Chronologie-Anim-e",
+      skills: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    },
+    {
+      name: "Crew-Dragon-Location-Map",
+      img: "/assets/project/Crewdragonlocationmap.png",
+      description: "J'ai créé une carte interactive qui permet de localiser tous les élèves de ma promotion à travers la France. Cette carte facilite la communication et les rencontres entre les membres de la promo, en leur permettant de visualiser où se trouvent leurs camarades géographiquement.",
+      lien: "https://sachdarras.github.io/Crew-Dragon-Location-Map/",
+      repo: "https://github.com/Sachdarras/Crew-Dragon-Location-Map",
+      skills: [1, 2, 3, 4, 5, 7, 8, 10, 9]
+    },
+    {
+      name: "Star-Wild",
+      img: "/assets/project/Star Wild.png",
+      description: "Bienvenue sur Star Wild, votre passerelle virtuelle vers les merveilles et les mystères du système solaire, présentée dans une expérience immersive en 3D. Explorez les planètes, les lunes et les astéroïdes avec un système de carte interactif qui vous permet de plonger dans les détails de chaque corps céleste.",
+      lien: "https://star-wild.netlify.app/",
+      repo: "https://github.com/Sachdarras/JS-RemoteFR-CrewDragon-P2-Team3",
+      skills: [1, 2, 3, 4, 5, 7, 8, 11, 12, 14, 9]
+    },
+    {
+      name: "AgendStrauss",
+      img: "/assets/project/agendstrauss.png",
+      description: "L'agend strauss est un ensemble de fonctionnalités avec une todo-list, une calculatrice, un agenda et une horloge numérique.",
+      lien: "https://agendstrauss.netlify.app/",
+      repo: "https://github.com/Sachdarras/agendStrauss",
+      skills: [1, 2, 3, 4, 5, 7, 8, 11, 12, 9]
+    },
+    {
+      name: "Échappée Célébrement Fantasque",
+      img: "/assets/project/ECF.png",
+      description: "Échappée Célèbrement Fantasque est une plateforme en ligne unique qui propose aux utilisateurs de choisir des sujets thématiques et de les explorer en compagnie de célébrités ou de personnages fictifs...",
+      lien: "https://echappee-celebrement-fantasque.netlify.app/",
+      repo: "https://github.com/Sachdarras/wcs-Protojam-goupeA",
+      skills: [1, 2, 3, 4, 5, 7, 8, 11, 12, 9]
+    },
+    {
+      name: "Origins Digital",
+      img: "/assets/project/orginsdigital.png",
+      description: "Origin Digital est une plateforme innovante dédiée au visionnage de vidéos...",
+      lien: "https://origins-digital.remote-fr-2.wilders.dev/",
+      repo: "https://github.com/WildCodeSchool-2024-02/JS-RemoteFR-CrewDragon-P3-Origins-Digital",
+      skills: [1, 2, 3, 4, 5, 7, 8, 11, 12, 9, 13]
+    },
+  ];
+
+  for (const project of projects) {
+    const existingProject = await prisma.project.findUnique({
+      where: { name: project.name },
+      include: { skills: true },
+    });
+
+    // Créer un projet seulement s'il n'existe pas déjà
+    if (!existingProject) {
+      const createdProject = await prisma.project.create({
+        data: {
+          name: project.name,
+          img: project.img,
+          description: project.description,
+          lien: project.lien,
+          repo: project.repo,
+          skills: {
+            connect: project.skills.map(skillId => ({ id: skillId })),
+          },
+        },
+      });
+      console.log('Projet ajouté:', createdProject);
+    } else {
+      console.log('Le projet existe déjà:', existingProject);
+    }
+  }
 }
 
 main()
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  })
+  .catch(e => console.error(e))
   .finally(async () => {
     await prisma.$disconnect();
   });

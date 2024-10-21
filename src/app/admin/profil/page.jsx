@@ -1,6 +1,7 @@
 "use client"; // Assurez-vous que cette ligne est au début de votre fichier
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link'; // Importez Link pour la navigation
 
 const ProfilAdmin = () => {
   const [descriptions, setDescriptions] = useState([]);
@@ -168,64 +169,69 @@ const ProfilAdmin = () => {
   };
 
   return (
-    <div className="admin-container">
-      <h1>Profil - Gérer les Descriptions</h1>
+    <> <nav className='navadmin'>
+          <Link href="/admin">Retour à l'Admin</Link>
+        </nav>
+      <div className="admin-container">
+        <h1>Profil - Gérer les Descriptions</h1>
+        
+        {/* Lien de retour vers la page admin */}
+       
 
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="name" placeholder="Nom" value={formData.name} onChange={handleChange} required />
-        <input type="text" name="title" placeholder="Titre" value={formData.title} onChange={handleChange} required />
-        <input type="text" name="subtitle" placeholder="Sous-titre" value={formData.subtitle} onChange={handleChange} required />
-        <textarea name="content" placeholder="Contenu" value={formData.content} onChange={handleChange} required />
-        <input type="file" name="image" accept="image/*" onChange={handleImageChange} />
-        <button type="submit">{editingId ? 'Mettre à jour' : 'Ajouter'}</button>
-      </form>
+        <h2>Liste des Descriptions</h2>
+        <ul>
+          {descriptions.map((desc) => (
+            <li key={desc.id}>
+              <h3>{desc.name}</h3>
+              <p>{desc.title}</p>
+              <p>{desc.subtitle}</p>
+              <p>{desc.content}</p>
+              <img src={desc.image} alt={desc.name} width={150} height={150} />
+              <div className="skill-actions">
+                <button onClick={() => handleEdit(desc)}>Éditer</button>
+                <button onClick={() => handleDelete(desc.id)}>Supprimer</button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
 
-      <h2>Liste des Descriptions</h2>
-      <ul>
-        {descriptions.map((desc) => (
-          <li key={desc.id}>
-            <h3>{desc.name}</h3>
-            <p>{desc.title}</p>
-            <p>{desc.subtitle}</p>
-            <p>{desc.content}</p>
-            <img src={desc.image} alt={desc.name} width={150} height={150} />
-            <button onClick={() => handleEdit(desc)}>Éditer</button>
-            <button onClick={() => handleDelete(desc.id)}>Supprimer</button>
-          </li>
-        ))}
-      </ul>
+      <div className="skill-container">
+        <h2>Liste des Compétences</h2>
+        <form onSubmit={handleSkillSubmit}>
+          <input
+            type="text"
+            name="name"
+            placeholder="Nom de la compétence"
+            value={skillFormData.name}
+            onChange={handleSkillChange}
+            required
+          />
+          <input
+            type="file"
+            name="image"
+            accept="image/*"
+            onChange={handleSkillImageChange}
+          />
+          <button type="submit">{editingSkillId ? 'Mettre à jour' : 'Ajouter'}</button>
+        </form>
 
-      <h2>Liste des Compétences</h2>
-      <form onSubmit={handleSkillSubmit}>
-        <input type="text" name="name" placeholder="Nom de la compétence" value={skillFormData.name} onChange={handleSkillChange} required />
-        <input type="file" name="image" accept="image/*" onChange={handleSkillImageChange} />
-        <button type="submit">{editingSkillId ? 'Mettre à jour' : 'Ajouter'}</button>
-      </form>
-      <ul>
-        {skills.map((skill, index) => (
-          <li key={skill.id}>
-            <h3>{skill.name}</h3>
-            <img src={skill.image} alt={skill.name} width={150} height={150} />
-            <button onClick={() => handleSkillEdit(skill)}>Éditer</button>
-            <button onClick={() => handleSkillDelete(skill.id)}>Supprimer</button>
-            {/* Boutons pour monter et descendre */}
-            <button 
-              onClick={() => handleSkillMove(index, 'up')} 
-              disabled={index === 0} // Désactiver si c'est le premier élément
-            >
-              ↑
-            </button>
-            <button 
-              onClick={() => handleSkillMove(index, 'down')} 
-              disabled={index === skills.length - 1} // Désactiver si c'est le dernier élément
-            >
-              ↓
-            </button>
-          </li>
-        ))}
-      </ul>
-    </div>
+        <ul>
+          {skills.map((skill, index) => (
+            <li key={skill.id}>
+              <h3>{skill.name}</h3>
+              <img src={skill.image} alt={skill.name} width={150} height={150} />
+              <div className="skill-actions">
+                <button onClick={() => handleSkillEdit(skill)}>Éditer</button>
+                <button onClick={() => handleSkillDelete(skill.id)}>Supprimer</button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
   );
 };
 
 export default ProfilAdmin;
+

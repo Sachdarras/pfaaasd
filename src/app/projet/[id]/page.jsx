@@ -1,27 +1,62 @@
-
 "use client"; // Assurez-vous qu'il s'agit d'un composant client
 
-import projects from "../../data/projectData"; // Ajustez le chemin si nécessaire
-import skillsData from "../../data/technos"; // Importation des compétences
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation"; // Importer le hook useRouter
+import { useRouter } from "next/navigation";
 
 function ProjectPage({ params }) {
   const { id } = params; // Récupérer l'ID des paramètres
   const router = useRouter(); // Utiliser le router pour la navigation
 
-  // Trouver le projet correspondant par ID
-  const project = projects.find((proj) => proj.id === Number(id));
+  // State pour stocker les données du projet et les projets pour le carrousel
+  const [project, setProject] = useState(null);
+  const [skills, setSkills] = useState([]); // Initialiser avec un tableau vide
+  const [allProjects, setAllProjects] = useState([]); // Pour stocker tous les projets
+  const [loading, setLoading] = useState(true);
 
-  // Afficher un message d'erreur si le projet n'est pas trouvé
+  // Utiliser useEffect pour récupérer les données du projet et les projets pour le carrousel
+  useEffect(() => {
+    const fetchProject = async () => {
+      try {
+        // Récupérer le projet spécifique par son ID via l'API
+        const res = await fetch(`/api/projects/${id}`);
+        const data = await res.json();
+        
+        if (res.ok) {
+          setProject(data); // Assurez-vous que les données existent
+          setSkills(data.skills || []); // Assurez-vous que les compétences existent, sinon un tableau vide
+        } else {
+          console.error(data.error); // Afficher l'erreur si le projet n'est pas trouvé
+        }
+
+        // Récupérer tous les projets pour le carrousel
+        const allProjectsRes = await fetch("/api/projects");
+        const allProjectsData = await allProjectsRes.json();
+        setAllProjects(allProjectsData);
+
+        setLoading(false);
+      } catch (error) {
+        console.error("Erreur lors de la récupération des projets:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchProject();
+  }, [id]);
+
+  if (loading) {
+    return <div>Chargement...</div>;
+  }
+
   if (!project) {
     return <div>Projet non trouvé</div>;
   }
 
   return (
     <>
+      {/* Carousel des projets */}
       <div className="project-carousel">
-        {projects.map((proj) => (
+        {allProjects.map((proj) => (
           <div key={proj.id} className="carousel-item">
             <Image
               src={proj.img}
@@ -35,31 +70,33 @@ function ProjectPage({ params }) {
         ))}
       </div>
 
+      {/* Détails du projet sélectionné */}
       <div className="project-detail-container">
         <h1 className="header-title">{project.name}</h1>
-        <Image 
-          className="imgproject" 
-          src={project.img} 
-          alt={project.name} 
-          width={500} 
-          height={300} 
+        <Image
+          className="imgproject"
+          src={project.img}
+          alt={project.name}
+          width={500}
+          height={300}
         />
         <p>{project.description}</p>
         <h2 className="skilltitle">Compétences</h2>
         <div className="techno-container">
-          {project.techno.map((techId) => {
-            const tech = skillsData.find(skill => skill.id === techId);
-            return tech ? (
+          {skills.length > 0 ? ( // Vérifier si skills n'est pas vide
+            skills.map((skill) => (
               <Image
-                key={tech.id}
-                src={tech.img}
-                alt={tech.name}
+                key={skill.id}
+                src={skill.image}
+                alt={skill.name}
                 className="tech-icon"
                 width={50}
                 height={50}
               />
-            ) : null;
-          })}
+            ))
+          ) : (
+            <p>Aucune compétence disponible.</p> // Message si aucune compétence
+          )}
         </div>
         <ul>
           <li>

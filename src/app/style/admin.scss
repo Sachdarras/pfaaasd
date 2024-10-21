@@ -1,0 +1,32 @@
+.admin-container1 {
+  max-width: 800px;
+  margin: 0 auto; // Centre le conteneur
+  padding: 20px;
+  background-color: #f9f9f9; // Couleur de fond
+  border-radius: 8px; // Coins arrondis
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); // Ombre légère pour le conteneur
+
+  h1 {
+    text-align: center; // Centre le titre
+    color: #333; // Couleur du texte
+    margin-bottom: 20px; // Espacement en bas du titre
+  }
+
+  nav {
+    display: flex; // Affiche les liens en ligne
+    justify-content: center; // Centre les liens horizontalement
+    margin-top: 20px; // Espacement au-dessus de la navigation
+
+    a {
+      margin: 0 15px; // Espacement entre les liens
+      text-decoration: none; // Supprime le soulignement par défaut
+      color: #007bff; // Couleur du lien
+      font-weight: bold; // Met le texte en gras
+      transition: color 0.3s; // Transition pour le changement de couleur
+
+      &:hover {
+        color: #0056b3; // Change la couleur au survol
+      }
+    }
+  }
+}
