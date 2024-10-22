@@ -1,3 +1,195 @@
+@use "./variable.scss";
+
+// Styles pour les particules
+.particles {
+  position: absolute; // Ou fixed, selon votre besoin
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; // Assurez-vous que le z-index est inférieur
+}
+
+.homepage-container {
+  position: relative; // Assurez-vous que la position est relative
+  z-index: 1; // Doit être supérieur à celui des particules
+}
+
+.header-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logoasd {
+  width: 350px;
+  height: auto;
+  background: none;
+}
+
+.header-title {
+  text-align: center;
+  font-size: 3em;
+  text-shadow: 1px 0px 1px, 0px 1px 1px black, 2px 1px 1px black,
+    1px 2px 1px black, 3px 2px 1px black, 2px 3px 1px black, 4px 3px 1px black,
+    3px 4px 1px black, 5px 4px 1px black, 4px 5px 1px black, 6px 5px 1px #ffd700,
+    5px 6px 1px #ffd700, 7px 6px 1px #ffd700;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  margin-top: 50px;
+  flex-wrap: wrap; /* Permet aux éléments de se réorganiser */
+  justify-content: center; /* Centre le contenu */
+}
+
+.profil {
+  position: relative; // Assurez-vous que la position est relative
+  z-index: 1; // Doit être supérieur à celui des particules
+  width: 100%;
+  max-width: 350px; /* Conserve la taille sur les écrans plus grands */
+  height: auto;
+  margin: auto;
+  border-radius: 20px;
+  box-shadow: inset -1px 3px 8px 5px gold, 2px 1px 10px 0px black,
+    5px 5px 15px 5px black;
+}
+
+.sub-title {
+  text-shadow: black 1px 1px;
+}
+
+.description-container {
+  position: relative; // Assurez-vous que la position est relative
+  z-index: 2; // Doit être supérieur à celui des particules
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  width: 100%;
+  max-width: 43%; /* Ajuste la largeur maximale */
+  margin: auto; /* Centre le conteneur */
+  box-shadow: inset -1px 3px 8px 5px gold, 2px 1px 10px 0px black,
+    5px 5px 15px 5px black;
+}
+
+.description-container h2 {
+  margin-bottom: 0;
+  font-size: 2em;
+  text-shadow: 1px 0px 1px, 0px 1px 1px black, 2px 1px 1px black,
+    1px 2px 1px black, 3px 1px 1px black, 2px 3px 1px black, 4px 3px 1px black,
+    3px 4px 1px black, 5px 4px 1px black, 4px 5px 1px black, 6px 5px 1px #ffd700,
+    5px 6px 1px #ffd700, 7px 6px 1px #ffd700;
+}
+
+.description-container h3 {
+  text-shadow: 1px 0px 1px, 0px 1px 1px black, 2px 1px 1px black,
+    1px 2px 1px black, 3px 1px 1px black, 2px 3px 1px black, 4px 3px 1px black,
+    3px 4px 1px black, 5px 4px 1px black, 4px 5px 1px black, 6px 5px 1px #ffd700,
+    5px 6px 1px #ffd700, 7px 6px 1px #ffd700;
+  margin-top: 0;
+  margin-bottom: 5px;
+  font-size: 1.8em;
+}
+
+.description-container h4 {
+  margin-top: 0;
+  font-size: 1.7em;
+}
+
+.description-container p {
+  margin-top: 0;
+  font-size: 1.5em;
+}
+
+.skills-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.skills-container h2 {
+  font-size: 2rem;
+  text-shadow: 1px 0px 1px, 0px 1px 1px black, 2px 1px 1px black,
+    1px 2px 1px black, 3px 2px 1px black, 2px 3px 1px black, 4px 3px 1px black,
+    3px 4px 1px black, 5px 4px 1px black, 4px 5px 1px black, 6px 5px 1px #ffd700,
+    5px 6px 1px #ffd700, 7px 6px 1px #ffd700;
+}
+
+.logo {
+  width: 70px;
+  height: auto; /* Ajout de la hauteur auto pour rendre l'image responsive */
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap; /* Permet aux logos de s'adapter sur plusieurs lignes si nécessaire */
+  max-width: 100%; /* S'assure que le conteneur ne dépasse pas la largeur de l'écran */
+}
+
+.skills-container ul {
+  margin-right: 30px;
+  margin-left: 30px;
+  padding: 25px;
+  box-shadow: inset 1px 1px 5px 5px gold, 2px 5px 10px 0px black,
+    5px 5px 15px 5px black;
+  background: whitesmoke;
+  border-radius: 20px;
+}
+
+.skills-container li {
+  list-style: none;
+}
+
+.footer-container {
+  text-align: center;
+
+  p {
+    color: #ffd700;
+  }
+}
+
+.footer-container p {
+  text-shadow: 1px 0px 1px, 0px 1px 1px black, 2px 1px 1px black,
+    1px 2px 1px black, 3px 2px 1px black, 2px 3px 1px black, 4px 3px 1px black,
+    3px 4px 1px black, 5px 4px 1px black, 4px 5px 1px black, 6px 5px 1px #ffd700,
+    5px 6px 1px #ffd700, 7px 6px 1px #ffd700;
+}
+
+/* Media queries pour ajuster les tailles de police sur les petits écrans */
+@media (max-width: 768px) {
+  .header-title {
+    font-size: 2em; /* Réduit la taille de police */
+  }
+
+  .description-container h2,
+  .description-container h3,
+  .description-container h4 {
+    font-size: 1.2em; /* Réduit la taille de la police des titres */
+  }
+
+  .content {
+    flex-direction: column; /* Change la direction en colonne sur les petits écrans */
+    align-items: center; /* Centre le contenu */
+  }
+
+  .profil,
+  .description-container {
+    width: 85%;
+    max-width: 90%; /* Rend les conteneurs plus larges sur les petits écrans */
+  }
+
+  .profil {
+    margin-top: 40px;
+  }
+}
+
 .info-container {
   display: flex;
   flex-direction: column;
@@ -18,39 +210,6 @@
   }
 }
 
-.info-container li {
-  list-style: none;
-  display: flex;
-  align-items: center;
-  font-size: 1.5rem; /* Taille de police par défaut */
-  padding: 10px;
-  color: #363d3d;
-
-  /* Styles responsives */
-  @media (max-width: 768px) { /* Pour les écrans jusqu'à 768px */
-    font-size: 1rem; /* Réduction de la taille de police sur mobile */
-  }
-}
-
-.imginfo {
-  width: 50px;
-  margin-right: 20px;
-
-  @media (max-width: 768px) { /* Pour les écrans jusqu'à 768px */
-    width: 40px; /* Réduction de la taille des images */
-    height: auto;
-  }
-}
-
-.info-container a {
-  text-decoration: none;
-  color: inherit;
-}
-
-.info-container a:hover {
-  color: #ffd700;
-}
-
 .cv-container {
   display: flex;
   flex-direction: column;
@@ -62,80 +221,4 @@
   @media (max-width: 768px) { /* Pour les écrans jusqu'à 768px */
     width: 80%; /* Largeur de 80% pour le conteneur CV */
   }
-}
-
-.cv-container h2 {
-  text-shadow: 1px 0px 1px black, 0px 1px 1px black, 2px 1px 1px black,
-    1px 2px 1px black, 3px 2px 1px black, 2px 3px 1px black, 4px 3px 1px black,
-    3px 4px 1px black, 5px 4px 1px black, 6px 5px 1px #ffd700,
-    5px 6px 1px #ffd700, 7px 6px 1px #ffd700;
-}
-
-.cv {
-  width: 600px; /* Largeur par défaut pour les grands écrans */
-  box-shadow: inset -1px 3px 8px 5px gold, 2px 1px 10px 0px black,
-    5px 5px 15px 5px black;
-  border-radius: 10px;
-  display: flex; /* Ajout d'un flex pour centrer l'image */
-  justify-content: center; /* Centrer horizontalement */
-  align-items: center; /* Centrer verticalement */
-
-  /* Styles responsives */
-  @media (max-width: 768px) { /* Pour les écrans jusqu'à 768px */
-    width: 90%; /* Largeur de 90% pour l'image CV */
-  }
-}
-
-.cv-image {
- /* Ajustez la largeur de l'image pour remplir le conteneur */
-  transition: transform 0.3s ease; /* Transition pour un effet fluide */
-
-  /* Pas de zoom sur mobile */
-  @media (max-width: 768px) {
-    transform: scale(1); /* Pas de zoom sur les petits écrans */
-    width: 95%;
-    margin-right: -80px;
-  }
-}
-
-.cv-image:hover {
-  transform: scale(1.4); /* Zoom léger, ajustez la valeur pour un zoom plus prononcé */
-}
-
-.button-cv {
-  padding: 10px 20px;
-  margin: 10px;
-  margin-top: 30px;
-  font-size: 1.2em;
-  color: #ffd700;
-  background-color: aliceblue;
-  border: none;
-  border-radius: 10px;
-  box-shadow: inset -1px 3px 8px 5px gold, 2px 1px 10px 0px black,
-    5px 5px 15px 5px black;
-  cursor: pointer;
-  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease,
-    box-shadow 0.3s ease;
-  font-family: variable.$font-text;
-  text-shadow: black 1px 1px;
-  text-decoration: none;
-
-  /* Pour centrer le bouton */
-  @media (max-width: 768px) {
-    width: 100%; /* Optionnel : rend le bouton plein écran sur mobile */
-   
-    margin-left: 40px;
-  }
-}
-
-/* Assurez-vous d'inclure les styles de survol */
-.button-cv:hover {
-  transform: scale(1.05); /* Zoom léger */
-  background-color: #ffd700; /* Inverser la couleur de fond */
-  color: black;
-  text-shadow: aliceblue 1px 1px; /* Met en valeur les lettres */
-  
-  /* Inversion des couleurs du cadre */
-  box-shadow: inset -1px 3px 8px 5px black, 2px 1px 10px 0px gold,
-    5px 5px 15px 5px gold;
 }

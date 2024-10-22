@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Nav from './components/Nav'; // Corrigez le chemin ici
 import Footer from '../app/components/Footer'; // Corrigez le chemin ici
+
 import './style/global.scss';
 
 export const metadata = {
@@ -15,6 +16,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="fr">
       <body>
+      
         <div className="header-container">
           <Image 
             src="/assets/logo/logowithoutBG.png" 
