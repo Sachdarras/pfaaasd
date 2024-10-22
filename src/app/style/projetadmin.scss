@@ -1,5 +1,5 @@
 .admin-projects {
-  padding: 40px;
+  padding: 60px; /* Augmenter le padding */
   max-width: 1200px;
   margin: 0 auto;
   font-family: 'Roboto', sans-serif;
@@ -8,24 +8,25 @@
   h1, h2 {
     text-align: center;
     color: #333;
-    margin-bottom: 30px;
+    margin-bottom: 40px; /* Augmenter la marge inférieure */
+    font-size: 2.5rem; /* Agrandir la taille de la police */
   }
 
   /* Formulaire de projet */
   .project-form {
     background-color: #fff;
-    padding: 30px;
+    padding: 40px; /* Augmenter le padding */
     border-radius: 15px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    margin-bottom: 40px;
+    margin-bottom: 60px; /* Augmenter la marge inférieure */
 
     input, textarea, select {
       width: 100%;
-      padding: 12px;
-      margin-bottom: 20px;
+      padding: 20px; /* Augmenter le padding pour les inputs */
+      margin-bottom: 25px; /* Augmenter la marge inférieure */
       border: 1px solid #ccc;
       border-radius: 8px;
-      font-size: 16px;
+      font-size: 20px; /* Agrandir la taille de la police pour les inputs */
       transition: border-color 0.3s ease;
 
       &:focus {
@@ -35,20 +36,21 @@
 
     label {
       display: block;
-      margin-bottom: 10px;
+      margin-bottom: 12px; /* Augmenter la marge inférieure */
       font-weight: bold;
       color: #555;
+      font-size: 18px; /* Agrandir la taille de la police */
     }
 
     button {
       width: 100%;
-      padding: 12px;
+      padding: 16px; /* Augmenter le padding */
       background-color: #007BFF;
       color: white;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      font-size: 16px;
+      font-size: 18px; /* Agrandir la taille de la police */
       transition: background-color 0.3s ease;
 
       &:hover {
@@ -65,12 +67,13 @@
 
   .dropdown-toggle {
     background-color: #f8f9fa;
-    padding: 12px;
+    padding: 16px; /* Augmenter le padding */
     border: 1px solid #ccc;
     border-radius: 8px;
     cursor: pointer;
     text-align: left;
-    margin-bottom: 20px;
+    margin-bottom: 25px; /* Augmenter la marge inférieure */
+    font-size: 18px; /* Agrandir la taille de la police */
   }
 
   .dropdown-menu {
@@ -81,29 +84,31 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     width: 100%;
-    max-height: 200px;
+    max-height: 250px; /* Augmenter la hauteur max */
     overflow-y: auto;
     margin-top: 5px;
   }
 
-.checkbox-option {
-  padding: 10px 12px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
+  .checkbox-option {
+    padding: 12px 16px; /* Augmenter le padding */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
 
-  input {
-    margin-right: 10px; /* Gardez cette marge pour l'espacement à droite de la checkbox */
+    input {
+      margin-right: 12px; /* Gardez cette marge pour l'espacement à droite de la checkbox */
+    }
+
+    &:hover {
+      background-color: #f1f1f1;
+    }
   }
-
-  &:hover {
-    background-color: #f1f1f1;
-  }
-}
-
 
   /* Liste des projets */
   .project-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Créer une grille responsive */
+    gap: 20px; /* Espacement entre les cartes */
     list-style-type: none;
     padding: 0;
   }
@@ -112,24 +117,30 @@
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 15px;
-    padding: 20px;
-    margin-bottom: 20px;
-    transition: box-shadow 0.3s ease;
+    padding: 30px; /* Augmenter le padding pour les cartes */
+    margin-bottom: 25px; /* Augmenter la marge inférieure */
+    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Ajouter la transition pour le zoom */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ajouter une ombre légère aux cartes */
+    display: flex;
+    flex-direction: column; /* Alignement vertical */
+    justify-content: space-between; /* Équilibrer l'espace à l'intérieur de la carte */
 
     &:hover {
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Ombre plus forte au survol */
+      transform: scale(1.05); /* Zoom léger au survol */
     }
   }
 
   .project-name {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
+    font-size: 2.5rem; /* Agrandir la taille de la police */
+    margin-bottom: 15px; /* Augmenter la marge inférieure */
     color: #007BFF;
   }
 
   .project-description, .projectlink, .project-repo {
-    margin: 10px 0;
+    margin: 15px 0; /* Augmenter la marge verticale */
     color: #555;
+    font-size: 18px; /* Agrandir la taille de la police */
   }
 
   .skills-list {
@@ -140,23 +151,25 @@
   .skill-item {
     display: flex;
     align-items: center;
-    margin-right: 10px;
+    margin-right: 15px; /* Augmenter l'espacement */
   }
 
   .skill-img {
-    margin-right: 5px;
+    margin-right: 8px; /* Augmenter l'espacement */
   }
 
   .no-skills {
     color: #777;
+    font-size: 16px; /* Agrandir la taille de la police */
   }
 
   .edit-button, .delete-button {
-    margin-right: 10px;
-    padding: 8px 12px;
+    margin-right: 15px; /* Augmenter l'espacement */
+    padding: 10px 16px; /* Augmenter le padding */
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 16px; /* Agrandir la taille de la police */
   }
 
   .edit-button {
