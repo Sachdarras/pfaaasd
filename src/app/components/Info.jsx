@@ -51,8 +51,8 @@ function Info() {
       </div>
       <div className="cv-container">
         <h2>Mon CV</h2>
-        <Image src="/assets/CV/CV-ASDi.png" className="cv cv-image" alt="CV Alexandre-Sacha Darras" width={500} height={700} />
-        <a href="/assets/CV/CV-ASD.pdf" download="cvASD.pdf">
+        <Image src="/assets/CV/CV-ASDi.jpg" className="cv cv-image" alt="CV Alexandre-Sacha Darras" width={500} height={700} />
+        <a href="/assets/CV/CVASD.pdf" download="cvASD.pdf">
           <button className="button-cv" type="button">
             Télécharger mon CV
           </button>

@@ -1,112 +1,68 @@
+@use "./variable.scss";
 .info-container {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   box-shadow: inset -1px 3px 8px 5px gold, 2px 1px 10px 0px black,
     5px 5px 15px 5px black;
-  width: 600px; /* Largeur par défaut pour les grands écrans */
+  width: 90%; /* Utilisation de 90% pour les petits écrans */
+  max-width: 600px; /* Largeur maximum pour les grands écrans */
   margin: auto;
   margin-top: 50px;
   margin-bottom: 50px;
   border-radius: 20px;
   background-color: white;
 
-  /* Styles responsives */
-  @media (max-width: 768px) { /* Pour les écrans jusqu'à 768px */
-    width: 80%; /* Largeur de 80% */
-  }
-}
-
-.info-container li {
-  list-style: none;
-  display: flex;
-  align-items: center;
-  font-size: 1.5rem; /* Taille de police par défaut */
-  padding: 10px;
-  color: #363d3d;
+  ul { list-style: none; }
+  li { font-size: 1.2em; }
+  a { color: inherit; text-decoration: none; }
 
   /* Styles responsives */
   @media (max-width: 768px) { /* Pour les écrans jusqu'à 768px */
-    font-size: 1rem; /* Réduction de la taille de police sur mobile */
+    padding: 20px; /* Ajout de padding pour éviter que le contenu touche les bords */
   }
-}
 
-.imginfo {
-  width: 50px;
-  margin-right: 20px;
-
-  @media (max-width: 768px) { /* Pour les écrans jusqu'à 768px */
-    width: 40px; /* Réduction de la taille des images */
-    height: auto;
+  @media (max-width: 480px) { /* Pour les écrans jusqu'à 480px */
+    font-size: 1em; /* Réduction de la taille de la police pour les très petits écrans */
   }
-}
-
-.info-container a {
-  text-decoration: none;
-  color: inherit;
-}
-
-.info-container a:hover {
-  color: #ffd700;
 }
 
 .cv-container {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%; /* Assurez-vous que le conteneur prend toute la largeur disponible */
 
-  /* Styles responsives */
-  @media (max-width: 768px) { /* Pour les écrans jusqu'à 768px */
-    width: 80%; /* Largeur de 80% pour le conteneur CV */
+  h2 {
+    font-size: 2em;
+    text-shadow: 1px 0px 1px, 0px 1px 1px black, 2px 1px 1px black,
+      1px 2px 1px black, 3px 2px 1px black, 2px 3px 1px black, 4px 3px 1px black,
+      3px 4px 1px black, 5px 4px 1px black, 4px 5px 1px black, 6px 5px 1px #ffd700,
+      5px 6px 1px #ffd700, 7px 6px 1px #ffd700;
   }
-}
-
-.cv-container h2 {
-  text-shadow: 1px 0px 1px black, 0px 1px 1px black, 2px 1px 1px black,
-    1px 2px 1px black, 3px 2px 1px black, 2px 3px 1px black, 4px 3px 1px black,
-    3px 4px 1px black, 5px 4px 1px black, 6px 5px 1px #ffd700,
-    5px 6px 1px #ffd700, 7px 6px 1px #ffd700;
-}
-
-.cv {
-  width: 600px; /* Largeur par défaut pour les grands écrans */
-  box-shadow: inset -1px 3px 8px 5px gold, 2px 1px 10px 0px black,
-    5px 5px 15px 5px black;
-  border-radius: 10px;
-  display: flex; /* Ajout d'un flex pour centrer l'image */
-  justify-content: center; /* Centrer horizontalement */
-  align-items: center; /* Centrer verticalement */
 
   /* Styles responsives */
   @media (max-width: 768px) { /* Pour les écrans jusqu'à 768px */
-    width: 90%; /* Largeur de 90% pour l'image CV */
+    width: 90%; /* Largeur de 90% pour le conteneur CV */
+  }
+
+  @media (max-width: 480px) { /* Pour les écrans jusqu'à 480px */
+    h2 { font-size: 1.5em; } /* Réduction de la taille de la police pour le titre */
   }
 }
 
-.cv-image {
- /* Ajustez la largeur de l'image pour remplir le conteneur */
-  transition: transform 0.3s ease; /* Transition pour un effet fluide */
-
-  /* Pas de zoom sur mobile */
-  @media (max-width: 768px) {
-    transform: scale(1); /* Pas de zoom sur les petits écrans */
-    width: 95%;
-    margin-right: -80px;
-  }
-}
-
-.cv-image:hover {
-  transform: scale(1.4); /* Zoom léger, ajustez la valeur pour un zoom plus prononcé */
-}
-
+/* Styles pour le bouton */
 .button-cv {
   padding: 10px 20px;
   margin: 10px;
   margin-top: 30px;
-  font-size: 1.2em;
+  font-size: 1.5em;
   color: #ffd700;
   background-color: aliceblue;
   border: none;
@@ -118,24 +74,31 @@
     box-shadow 0.3s ease;
   font-family: variable.$font-text;
   text-shadow: black 1px 1px;
-  text-decoration: none;
 
-  /* Pour centrer le bouton */
-  @media (max-width: 768px) {
-    width: 100%; /* Optionnel : rend le bouton plein écran sur mobile */
-   
-    margin-left: 40px;
+  /* Effet de survol */
+  &:hover {
+    background-color: #ffd700; /* Couleur de fond au survol */
+    color: aliceblue; /* Couleur de texte au survol */
+    transform: scale(1.05); /* Zoom au survol */
   }
 }
 
-/* Assurez-vous d'inclure les styles de survol */
-.button-cv:hover {
-  transform: scale(1.05); /* Zoom léger */
-  background-color: #ffd700; /* Inverser la couleur de fond */
-  color: black;
-  text-shadow: aliceblue 1px 1px; /* Met en valeur les lettres */
-  
-  /* Inversion des couleurs du cadre */
-  box-shadow: inset -1px 3px 8px 5px black, 2px 1px 10px 0px gold,
-    5px 5px 15px 5px gold;
+/* Styles pour l'image du CV */
+.cv-image {
+  transition: transform 0.3s ease; /* Transition pour l'effet de zoom */
+
+  &:hover {
+    transform: scale(1.4); /* Zoom sur l'image au survol */
+  }
+
+  /* Styles responsives */
+  @media (max-width: 768px) { /* Pour les écrans jusqu'à 768px */
+    width: 100%; /* Assurez-vous que l'image s'adapte à la largeur */
+    max-width: 90%; /* Largeur maximum pour les petits écrans */
+  }
+
+  @media (max-width: 480px) { /* Pour les écrans jusqu'à 480px */
+    max-width: 80%; /* Ajustement pour les très petits écrans */
+  }
 }
+
