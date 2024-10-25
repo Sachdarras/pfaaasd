@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Link from 'next/link'; // Importez Link pour la navigation
+import { useRouter } from 'next/navigation'; // Importer useRouter pour la redirection
 
 const AdminProjects = () => {
   const [projects, setProjects] = useState([]);
@@ -17,12 +18,20 @@ const AdminProjects = () => {
   });
   const [editing, setEditing] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false); // État pour contrôler l'ouverture du menu
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // État d'authentification
+  const router = useRouter(); // Instancier useRouter
 
-  // Charger les projets existants et les compétences disponibles
+  // Vérifier l'authentification à l'initialisation
   useEffect(() => {
-    fetchProjects();
-    fetchSkills(); // Charger les compétences disponibles
-  }, []);
+    const userId = localStorage.getItem('userId'); // Récupérer l'ID de l'utilisateur
+    if (userId) {
+      setIsAuthenticated(true); // L'utilisateur est authentifié
+      fetchProjects(); // Charger les projets uniquement si l'utilisateur est authentifié
+      fetchSkills(); // Charger les compétences disponibles
+    } else {
+      router.push('/auth/signin'); // Rediriger vers la page de connexion
+    }
+  }, [router]);
 
   // Charger les projets depuis l'API
   const fetchProjects = async () => {
@@ -105,6 +114,11 @@ const AdminProjects = () => {
       console.error('Erreur lors de la suppression du projet:', error);
     }
   };
+
+  // Si l'utilisateur n'est pas authentifié, ne pas rendre le contenu
+  if (!isAuthenticated) {
+    return null; // Vous pouvez aussi afficher un loader ici
+  }
 
   return (
     <>
