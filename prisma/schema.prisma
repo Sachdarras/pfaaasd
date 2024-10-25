@@ -35,15 +35,10 @@ model Skill {
 }
 
 model User {
-  id       Int      @id @default(autoincrement())
-  email    String   @unique
+  id      Int    @id @default(autoincrement())
+
+  email   String @unique
   password String
-  role     Role     @default(USER) // Ajout du champ role avec une valeur par défaut
-
+  role    String @default("admin") // 
 }
 
-// Ajout de l'enum pour les rôles
-enum Role {
-  USER
-  ADMIN
-}

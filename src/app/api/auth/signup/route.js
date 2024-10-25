@@ -1,38 +1,34 @@
+// src/app/api/auth/signup/route.js
+
 import { PrismaClient } from '@prisma/client';
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
 
 export async function POST(req) {
-  const { email, password, role } = await req.json();
+  const body = await req.json();
+  const { email, password } = body; // On n'inclut pas le champ name
 
-  // Vérifie si l'email existe déjà
-  const existingUser = await prisma.user.findUnique({
-    where: { email },
-  });
-  if (existingUser) {
-    return new Response(JSON.stringify({ error: 'Email already in use' }), {
-      status: 400,
-    });
-  }
-
-  // Hash le mot de passe
   const hashedPassword = await bcrypt.hash(password, 10);
 
   try {
-    // Crée l'utilisateur
-    const newUser = await prisma.user.create({
+    const user = await prisma.user.create({
       data: {
         email,
         password: hashedPassword,
-        role: role || 'ADMIN', // rôle par défaut si aucun n'est fourni
+        role: "admin", // Reste comme avant
       },
     });
-    return new Response(JSON.stringify(newUser), { status: 201 });
+
+    return new Response(JSON.stringify(user), {
+      status: 201,
+      headers: { 'Content-Type': 'application/json' },
+    });
   } catch (error) {
-    return new Response(
-      JSON.stringify({ error: 'User creation failed' }),
-      { status: 500 }
-    );
+    console.error(error);
+    return new Response(JSON.stringify({ error: 'User creation failed' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 }
