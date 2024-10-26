@@ -3,13 +3,14 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie'; // Importer js-cookie
 
 const Admin = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    const userId = localStorage.getItem('userId'); // Récupérer l'ID de l'utilisateur
+    const userId = Cookies.get('userId'); // Récupérer l'ID de l'utilisateur à partir des cookies
     if (userId) {
       setIsAuthenticated(true); // L'utilisateur est authentifié
     } else {

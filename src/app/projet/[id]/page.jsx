@@ -1,18 +1,8 @@
 "use client"; // Assurez-vous qu'il s'agit d'un composant client
-
+import ParticlesBackground from "../../components/ParticlesBackground.jsx" // Corrigez le chemin ici
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import ParticlesBackground from '../../components/ParticlesBackground'; // Corrigez le chemin ici
-// Composant Spinner pour le chargement
-function Spinner() {
-  return (
-    <div className="spinner">
-      <div className="double-bounce1"></div>
-      <div className="double-bounce2"></div>
-    </div>
-  );
-}
 
 function ProjectPage({ params }) {
   const { id } = params; // Récupérer l'ID des paramètres
@@ -55,7 +45,7 @@ function ProjectPage({ params }) {
   }, [id]);
 
   if (loading) {
-    return <Spinner />;
+    return <div>Chargement...</div>;
   }
 
   if (!project) {
@@ -63,7 +53,7 @@ function ProjectPage({ params }) {
   }
 
   return (
-    <><ParticlesBackground />
+    <>  <ParticlesBackground />
       {/* Carousel des projets */}
       <div className="project-carousel">
         {allProjects.map((proj) => (

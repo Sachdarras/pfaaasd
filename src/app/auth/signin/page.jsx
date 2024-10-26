@@ -1,6 +1,7 @@
 "use client";
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie'; // Importez la bibliothèque pour gérer les cookies
 
 const SignInPage = () => {
   const [error, setError] = useState(null);
@@ -29,8 +30,8 @@ const SignInPage = () => {
     } else {
       setSuccess(data.message);
       setError(null);
-      // Stocker le userId dans localStorage
-      localStorage.setItem('userId', data.userId);
+      // Stocker le userId dans un cookie
+      Cookies.set('userId', data.userId, { expires: 7 }); // Cookie expirant dans 7 jours
       // Rediriger vers la page admin après la connexion réussie
       router.push('/admin');
     }
