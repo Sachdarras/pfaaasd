@@ -2,11 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link'; // Importez Link pour la navigation
-<<<<<<< HEAD
-import Image from 'next/image'; // Importez Image pour optimiser les images
-=======
 import { useRouter } from 'next/navigation'; // Ajoutez cette ligne pour importer useRouter
->>>>>>> f20cb80453bd44abffdaed08d417927e7d931dc5
+import Cookies from 'js-cookie'; // Importer js-cookie
+import Image from 'next/image'; // Importer le composant Image de Next.js
 
 const ProfilAdmin = () => {
   const router = useRouter(); // Obtenez une instance du routeur
@@ -28,7 +26,7 @@ const ProfilAdmin = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const userId = localStorage.getItem('userId'); // Récupérer l'ID de l'utilisateur
+    const userId = Cookies.get('userId'); // Récupérer l'ID de l'utilisateur à partir des cookies
     if (!userId) {
       router.push('/auth/signin'); // Rediriger vers la page de connexion si non authentifié
     } else {
@@ -214,7 +212,7 @@ const ProfilAdmin = () => {
               <p>{desc.title}</p>
               <p>{desc.subtitle}</p>
               <p>{desc.content}</p>
-              <Image src={desc.image} alt={desc.name} width={150} height={150} /> {/* Utilisation de <Image /> */}
+              <Image src={desc.image} alt={desc.name} width={150} height={150} /> {/* Utiliser le composant Image */}
               <div className="skill-actions">
                 <button onClick={() => handleEdit(desc)}>Éditer</button>
                 <button onClick={() => handleDelete(desc.id)}>Supprimer</button>
@@ -247,16 +245,12 @@ const ProfilAdmin = () => {
           {skills.map((skill, index) => (
             <li key={skill.id}>
               <h3>{skill.name}</h3>
-<<<<<<< HEAD
-              <Image src={skill.image} alt={skill.name} width={150} height={150} /> {/* Utilisation de <Image /> */}
-=======
-              <img src={skill.image} alt={skill.name} width={50} height={50} />
->>>>>>> f20cb80453bd44abffdaed08d417927e7d931dc5
+              <Image src={skill.image} alt={skill.name} width={150} height={150} /> {/* Utiliser le composant Image */}
               <div className="skill-actions">
                 <button onClick={() => handleSkillEdit(skill)}>Éditer</button>
                 <button onClick={() => handleSkillDelete(skill.id)}>Supprimer</button>
-                <button onClick={() => handleSkillMove(index, 'up')}>↑</button>
-                <button onClick={() => handleSkillMove(index, 'down')}>↓</button>
+                <button onClick={() => handleSkillMove(index, 'up')} disabled={index === 0}>Monter</button>
+                <button onClick={() => handleSkillMove(index, 'down')} disabled={index === skills.length - 1}>Descendre</button>
               </div>
             </li>
           ))}

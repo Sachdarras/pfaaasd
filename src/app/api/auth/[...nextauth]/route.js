@@ -2,9 +2,11 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 import { PrismaClient } from '@prisma/client';
+import { sign } from 'jsonwebtoken'; // Assurez-vous d'importer cela
 import { setCookie } from 'cookies-next'; // Assurez-vous d'importer cela
 
 const prisma = new PrismaClient();
+const SECRET_KEY = process.env.JWT_SECRET; // Assurez-vous de définir cette clé dans votre .env
 
 export const authOptions = {
   providers: [
@@ -20,8 +22,12 @@ export const authOptions = {
         });
 
         if (user && (await bcrypt.compare(credentials.password, user.password))) {
-          // Ici, on peut définir un cookie après la connexion
-          setCookie('user', JSON.stringify({ email: user.email, role: user.role }), { maxAge: 60 * 60 * 24 }); // 1 jour
+          // Génération du token JWT
+          const token = sign({ userId: user.id, email: user.email, role: user.role }, SECRET_KEY, { expiresIn: '1d' });
+
+          // Définition du cookie avec le token
+          setCookie('authToken', token, { maxAge: 60 * 60 * 24, httpOnly: true, secure: process.env.NODE_ENV === 'production' });
+
           return user;
         }
 

@@ -2,13 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-<<<<<<< HEAD
 import Link from 'next/link';
-import Image from 'next/image'; // Import du composant Image
-=======
-import Link from 'next/link'; // Importez Link pour la navigation
-import { useRouter } from 'next/navigation'; // Importer useRouter pour la redirection
->>>>>>> f20cb80453bd44abffdaed08d417927e7d931dc5
+import Image from 'next/image';
+import Cookies from 'js-cookie'; // Import de js-cookie
 
 const AdminProjects = () => {
   const [projects, setProjects] = useState([]);
@@ -22,31 +18,19 @@ const AdminProjects = () => {
     skills: [],
   });
   const [editing, setEditing] = useState(null);
-<<<<<<< HEAD
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [message, setMessage] = useState(''); // Message d'information
+  const [message, setMessage] = useState('');
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // État d'authentification
 
   useEffect(() => {
     fetchProjects();
     fetchSkills();
-  }, []);
-=======
-  const [dropdownOpen, setDropdownOpen] = useState(false); // État pour contrôler l'ouverture du menu
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // État d'authentification
-  const router = useRouter(); // Instancier useRouter
-
-  // Vérifier l'authentification à l'initialisation
-  useEffect(() => {
-    const userId = localStorage.getItem('userId'); // Récupérer l'ID de l'utilisateur
-    if (userId) {
-      setIsAuthenticated(true); // L'utilisateur est authentifié
-      fetchProjects(); // Charger les projets uniquement si l'utilisateur est authentifié
-      fetchSkills(); // Charger les compétences disponibles
-    } else {
-      router.push('/auth/signin'); // Rediriger vers la page de connexion
+    // Vérifiez l'authentification à partir des cookies
+    const token = Cookies.get('authToken');
+    if (token) {
+      setIsAuthenticated(true);
     }
-  }, [router]);
->>>>>>> f20cb80453bd44abffdaed08d417927e7d931dc5
+  }, []);
 
   const fetchProjects = async () => {
     try {
@@ -223,14 +207,14 @@ const AdminProjects = () => {
           {projects.map((project) => (
             <li className="project-card" key={project.id}>
               <h3 className="project-name">{project.name}</h3>
-              <Image className="project-img" src={project.img} alt={project.name} width={100} height={100} /> {/* Utilisation de Image */}
+              <Image className="project-img" src={project.img} alt={project.name} width={100} height={100} />
               <p className="project-description">{project.description}</p>
               <h4 className="skills-title">Compétences:</h4>
               <ul className="skills-list">
                 {project.skills.length > 0 ? (
                   project.skills.map((skill) => (
                     <li className="skill-item" key={skill.id}>
-                      <Image className="skill-img" src={skill.image} alt={skill.name} width={30} height={30} /> {/* Utilisation de Image */}
+                      <Image className="skill-img" src={skill.image} alt={skill.name} width={30} height={30} />
                       {skill.name}
                     </li>
                   ))
