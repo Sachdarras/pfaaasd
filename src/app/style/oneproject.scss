@@ -1,6 +1,8 @@
 @use "./variable.scss"; // Assurez-vous que le chemin est correct
 
 .project-carousel {
+  position: relative;
+  z-index: 1; /* Assurez-vous que le carrousel est au-dessus du contenu */
   display: flex; /* Aligne les images en ligne */
   justify-content: center; /* Aligne les images en centrage horizontal */
   gap: 20px; /* Espacement entre les images */
@@ -42,6 +44,8 @@
 }
 
 .project-detail-container {
+  position: relative;
+  z-index: 2;
   width: auto;
   max-width: 1000px; /* Largeur maximum de la page */
   width: 80%; /* Prend 80% de la largeur sur petits écrans */

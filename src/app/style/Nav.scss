@@ -1,6 +1,8 @@
 /* src/styles/Nav.css */
 
 .nav-list {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: row;
   justify-content: space-around; /* Changer space-evenly à space-around */

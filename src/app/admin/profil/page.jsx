@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link'; // Importez Link pour la navigation
+import Image from 'next/image'; // Importez Image pour optimiser les images
 
 const ProfilAdmin = () => {
   const [descriptions, setDescriptions] = useState([]);
@@ -198,7 +199,7 @@ const ProfilAdmin = () => {
               <p>{desc.title}</p>
               <p>{desc.subtitle}</p>
               <p>{desc.content}</p>
-              <img src={desc.image} alt={desc.name} width={150} height={150} />
+              <Image src={desc.image} alt={desc.name} width={150} height={150} /> {/* Utilisation de <Image /> */}
               <div className="skill-actions">
                 <button onClick={() => handleEdit(desc)}>Éditer</button>
                 <button onClick={() => handleDelete(desc.id)}>Supprimer</button>
@@ -232,7 +233,7 @@ const ProfilAdmin = () => {
           {skills.map((skill, index) => (
             <li key={skill.id}>
               <h3>{skill.name}</h3>
-              <img src={skill.image} alt={skill.name} width={150} height={150} />
+              <Image src={skill.image} alt={skill.name} width={150} height={150} /> {/* Utilisation de <Image /> */}
               <div className="skill-actions">
                 <button onClick={() => handleSkillEdit(skill)}>Éditer</button>
                 <button onClick={() => handleSkillDelete(skill.id)}>Supprimer</button>

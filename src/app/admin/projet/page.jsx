@@ -2,49 +2,49 @@
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import Link from 'next/link'; // Importez Link pour la navigation
+import Link from 'next/link';
+import Image from 'next/image'; // Import du composant Image
 
 const AdminProjects = () => {
   const [projects, setProjects] = useState([]);
-  const [skillsList, setSkillsList] = useState([]); // Liste des compétences
+  const [skillsList, setSkillsList] = useState([]);
   const [formData, setFormData] = useState({
     name: '',
     img: '',
     description: '',
     lien: '',
     repo: '',
-    skills: [], // Skills ajoutés
+    skills: [],
   });
   const [editing, setEditing] = useState(null);
-  const [dropdownOpen, setDropdownOpen] = useState(false); // État pour contrôler l'ouverture du menu
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [message, setMessage] = useState(''); // Message d'information
 
-  // Charger les projets existants et les compétences disponibles
   useEffect(() => {
     fetchProjects();
-    fetchSkills(); // Charger les compétences disponibles
+    fetchSkills();
   }, []);
 
-  // Charger les projets depuis l'API
   const fetchProjects = async () => {
     try {
       const response = await axios.get('/api/projects');
       setProjects(response.data);
     } catch (error) {
       console.error('Erreur lors de la récupération des projets:', error);
+      setMessage('Erreur lors de la récupération des projets.');
     }
   };
 
-  // Charger les compétences depuis l'API
   const fetchSkills = async () => {
     try {
-      const response = await axios.get('/api/skills'); // API pour obtenir les compétences
+      const response = await axios.get('/api/skills');
       setSkillsList(response.data);
     } catch (error) {
       console.error('Erreur lors de la récupération des compétences:', error);
+      setMessage('Erreur lors de la récupération des compétences.');
     }
   };
 
-  // Gérer les changements dans le formulaire
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -53,7 +53,6 @@ const AdminProjects = () => {
     });
   };
 
-  // Gérer la sélection des compétences
   const handleCheckboxChange = (skillId) => {
     setFormData((prevFormData) => {
       const skills = [...prevFormData.skills];
@@ -65,14 +64,15 @@ const AdminProjects = () => {
     });
   };
 
-  // Soumettre le formulaire
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       if (editing) {
         await axios.put(`/api/projects/${editing}`, formData);
+        setMessage('Projet modifié avec succès.');
       } else {
         await axios.post('/api/projects', formData);
+        setMessage('Projet ajouté avec succès.');
       }
       setFormData({
         name: '',
@@ -80,29 +80,35 @@ const AdminProjects = () => {
         description: '',
         lien: '',
         repo: '',
-        skills: [], // Réinitialiser les skills après soumission
+        skills: [],
       });
       setEditing(null);
       fetchProjects();
     } catch (error) {
       console.error('Erreur lors de la soumission du formulaire:', error);
+      setMessage('Erreur lors de la soumission du formulaire.');
     }
   };
 
   const handleEdit = (project) => {
     setFormData({
       ...project,
-      skills: project.skills.map(skill => skill.id) // Assurez-vous que les compétences sont formatées correctement
+      skills: project.skills.map(skill => skill.id),
     });
     setEditing(project.id);
   };
 
   const handleDelete = async (id) => {
-    try {
-      await axios.delete(`/api/projects/${id}`);
-      fetchProjects();
-    } catch (error) {
-      console.error('Erreur lors de la suppression du projet:', error);
+    const confirmed = window.confirm('Êtes-vous sûr de vouloir supprimer ce projet ?');
+    if (confirmed) {
+      try {
+        await axios.delete(`/api/projects/${id}`);
+        setMessage('Projet supprimé avec succès.');
+        fetchProjects();
+      } catch (error) {
+        console.error('Erreur lors de la suppression du projet:', error);
+        setMessage('Erreur lors de la suppression du projet.');
+      }
     }
   };
 
@@ -113,6 +119,7 @@ const AdminProjects = () => {
       </nav>
       <div className="admin-projects">
         <h1 className="admin-title">Gestion des Projets</h1>
+        {message && <p className="status-message">{message}</p>}
         <form className="project-form" onSubmit={handleSubmit}>
           <input
             className="input-name"
@@ -159,7 +166,6 @@ const AdminProjects = () => {
             required
           />
 
-          {/* Menu déroulant pour sélectionner plusieurs compétences */}
           <label className="skills-label" htmlFor="skills">Compétences liées:</label>
           <div className="custom-dropdown">
             <div className="dropdown-toggle" onClick={() => setDropdownOpen(!dropdownOpen)}>
@@ -189,14 +195,14 @@ const AdminProjects = () => {
           {projects.map((project) => (
             <li className="project-card" key={project.id}>
               <h3 className="project-name">{project.name}</h3>
-              <img className="project-img" src={project.img} alt={project.name} width={100} />
+              <Image className="project-img" src={project.img} alt={project.name} width={100} height={100} /> {/* Utilisation de Image */}
               <p className="project-description">{project.description}</p>
               <h4 className="skills-title">Compétences:</h4>
               <ul className="skills-list">
                 {project.skills.length > 0 ? (
                   project.skills.map((skill) => (
                     <li className="skill-item" key={skill.id}>
-                      <img className="skill-img" src={skill.image} alt={skill.name} width={30} height={30} />
+                      <Image className="skill-img" src={skill.image} alt={skill.name} width={30} height={30} /> {/* Utilisation de Image */}
                       {skill.name}
                     </li>
                   ))
