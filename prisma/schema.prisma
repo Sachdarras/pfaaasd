@@ -33,3 +33,12 @@ model Skill {
   order Int 
   projects Project[] @relation("ProjectSkill")
 }
+
+model User {
+  id      Int    @id @default(autoincrement())
+
+  email   String @unique
+  password String
+  role    String @default("admin") // 
+}
+

@@ -2,9 +2,14 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link'; // Importez Link pour la navigation
+<<<<<<< HEAD
 import Image from 'next/image'; // Importez Image pour optimiser les images
+=======
+import { useRouter } from 'next/navigation'; // Ajoutez cette ligne pour importer useRouter
+>>>>>>> f20cb80453bd44abffdaed08d417927e7d931dc5
 
 const ProfilAdmin = () => {
+  const router = useRouter(); // Obtenez une instance du routeur
   const [descriptions, setDescriptions] = useState([]);
   const [skills, setSkills] = useState([]);
   const [formData, setFormData] = useState({
@@ -20,6 +25,16 @@ const ProfilAdmin = () => {
   });
   const [editingId, setEditingId] = useState(null);
   const [editingSkillId, setEditingSkillId] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const userId = localStorage.getItem('userId'); // Récupérer l'ID de l'utilisateur
+    if (!userId) {
+      router.push('/auth/signin'); // Rediriger vers la page de connexion si non authentifié
+    } else {
+      setIsAuthenticated(true); // L'utilisateur est authentifié
+    }
+  }, [router]); // Ajoutez router comme dépendance
 
   useEffect(() => {
     // Récupération des descriptions
@@ -222,21 +237,26 @@ const ProfilAdmin = () => {
           />
           <input
             type="file"
-            name="image"
             accept="image/*"
             onChange={handleSkillImageChange}
+            required
           />
           <button type="submit">{editingSkillId ? 'Mettre à jour' : 'Ajouter'}</button>
         </form>
-
         <ul>
           {skills.map((skill, index) => (
             <li key={skill.id}>
               <h3>{skill.name}</h3>
+<<<<<<< HEAD
               <Image src={skill.image} alt={skill.name} width={150} height={150} /> {/* Utilisation de <Image /> */}
+=======
+              <img src={skill.image} alt={skill.name} width={50} height={50} />
+>>>>>>> f20cb80453bd44abffdaed08d417927e7d931dc5
               <div className="skill-actions">
                 <button onClick={() => handleSkillEdit(skill)}>Éditer</button>
                 <button onClick={() => handleSkillDelete(skill.id)}>Supprimer</button>
+                <button onClick={() => handleSkillMove(index, 'up')}>↑</button>
+                <button onClick={() => handleSkillMove(index, 'down')}>↓</button>
               </div>
             </li>
           ))}

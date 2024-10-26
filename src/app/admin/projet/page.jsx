@@ -2,8 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+<<<<<<< HEAD
 import Link from 'next/link';
 import Image from 'next/image'; // Import du composant Image
+=======
+import Link from 'next/link'; // Importez Link pour la navigation
+import { useRouter } from 'next/navigation'; // Importer useRouter pour la redirection
+>>>>>>> f20cb80453bd44abffdaed08d417927e7d931dc5
 
 const AdminProjects = () => {
   const [projects, setProjects] = useState([]);
@@ -17,6 +22,7 @@ const AdminProjects = () => {
     skills: [],
   });
   const [editing, setEditing] = useState(null);
+<<<<<<< HEAD
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [message, setMessage] = useState(''); // Message d'information
 
@@ -24,6 +30,23 @@ const AdminProjects = () => {
     fetchProjects();
     fetchSkills();
   }, []);
+=======
+  const [dropdownOpen, setDropdownOpen] = useState(false); // État pour contrôler l'ouverture du menu
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // État d'authentification
+  const router = useRouter(); // Instancier useRouter
+
+  // Vérifier l'authentification à l'initialisation
+  useEffect(() => {
+    const userId = localStorage.getItem('userId'); // Récupérer l'ID de l'utilisateur
+    if (userId) {
+      setIsAuthenticated(true); // L'utilisateur est authentifié
+      fetchProjects(); // Charger les projets uniquement si l'utilisateur est authentifié
+      fetchSkills(); // Charger les compétences disponibles
+    } else {
+      router.push('/auth/signin'); // Rediriger vers la page de connexion
+    }
+  }, [router]);
+>>>>>>> f20cb80453bd44abffdaed08d417927e7d931dc5
 
   const fetchProjects = async () => {
     try {
@@ -111,6 +134,11 @@ const AdminProjects = () => {
       }
     }
   };
+
+  // Si l'utilisateur n'est pas authentifié, ne pas rendre le contenu
+  if (!isAuthenticated) {
+    return null; // Vous pouvez aussi afficher un loader ici
+  }
 
   return (
     <>
