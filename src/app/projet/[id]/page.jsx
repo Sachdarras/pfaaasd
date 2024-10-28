@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react"; // Importer React ici
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-
+import ParticlesBackground from '../../components/ParticlesBackground'; // Corrigez le chemin ici
 function ProjectPage({ params }) {
   const id = params.id; // Accéder à l'ID directement, sans React.use()
   const router = useRouter(); // Utiliser le router pour la navigation
@@ -56,7 +56,7 @@ function ProjectPage({ params }) {
 
   return (
     <>
-   
+     <ParticlesBackground />
       {/* Carousel des projets */}
       <div className="project-carousel">
         {allProjects.map((proj) => (

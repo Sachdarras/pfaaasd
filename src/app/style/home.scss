@@ -54,7 +54,7 @@
 }
 
 .description-container {
-  position:relative; // Assurez-vous que la position est relative
+ // Assurez-vous que la position est relative
   z-index: 5; // Doit être supérieur à celui des particules
   display: flex;
   flex-direction: column;

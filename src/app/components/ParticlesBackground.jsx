@@ -61,13 +61,13 @@ const ParticlesBackground = () => {
               default: "bounce",
             },
             random: false,
-            speed: 1, // Vitesse des particules
+            speed: 0.4, // Vitesse des particules
             straight: false,
           },
           number: {
             density: {
               enable: true,
-              area: 200,
+              area: 250,
             },
             value: 50, // Nombre de particules
           },
