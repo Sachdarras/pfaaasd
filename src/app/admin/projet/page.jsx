@@ -2,40 +2,39 @@
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import Link from 'next/link'; // Importez Link pour la navigation
-import { useRouter } from 'next/navigation'; // Importer useRouter pour la redirection
-import Cookies from 'js-cookie'; // Importer js-cookie pour la gestion des cookies
-import Image from 'next/image'; // Importer le composant Image
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
+import Image from 'next/image';
 
 const AdminProjects = () => {
   const [projects, setProjects] = useState([]);
-  const [skillsList, setSkillsList] = useState([]); // Liste des compétences
+  const [skillsList, setSkillsList] = useState([]);
   const [formData, setFormData] = useState({
     name: '',
-    img: '',
+    img: null, // Remplacer l'URL par null pour un fichier local
     description: '',
     lien: '',
     repo: '',
-    skills: [], // Skills ajoutés
+    skills: [],
   });
+  const [preview, setPreview] = useState(null); // État pour l'aperçu de l'image
   const [editing, setEditing] = useState(null);
-  const [dropdownOpen, setDropdownOpen] = useState(false); // État pour contrôler l'ouverture du menu
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // État d'authentification
-  const router = useRouter(); // Instancier useRouter
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const router = useRouter();
 
-  // Vérifier l'authentification à l'initialisation
   useEffect(() => {
-    const userId = Cookies.get('userId'); // Récupérer l'ID de l'utilisateur à partir des cookies
+    const userId = Cookies.get('userId');
     if (!userId) {
-      router.push('/auth/signin'); // Rediriger vers la page de connexion si non authentifié
+      router.push('/auth/signin');
     } else {
-      setIsAuthenticated(true); // L'utilisateur est authentifié
-      fetchProjects(); // Charger les projets uniquement si l'utilisateur est authentifié
-      fetchSkills(); // Charger les compétences disponibles
+      setIsAuthenticated(true);
+      fetchProjects();
+      fetchSkills();
     }
-  }, [router]); // Ajoutez router comme dépendance
+  }, [router]);
 
-  // Charger les projets depuis l'API
   const fetchProjects = async () => {
     try {
       const response = await axios.get('/api/projects');
@@ -45,17 +44,15 @@ const AdminProjects = () => {
     }
   };
 
-  // Charger les compétences depuis l'API
   const fetchSkills = async () => {
     try {
-      const response = await axios.get('/api/skills'); // API pour obtenir les compétences
+      const response = await axios.get('/api/skills');
       setSkillsList(response.data);
     } catch (error) {
       console.error('Erreur lors de la récupération des compétences:', error);
     }
   };
 
-  // Gérer les changements dans le formulaire
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -64,35 +61,56 @@ const AdminProjects = () => {
     });
   };
 
-  // Gérer la sélection des compétences
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setFormData({
+      ...formData,
+      img: file,
+    });
+    setPreview(file ? URL.createObjectURL(file) : null); // Mise à jour de l'aperçu de l'image
+  };
+
   const handleCheckboxChange = (skillId) => {
     setFormData((prevFormData) => {
       const skills = [...prevFormData.skills];
-      if (skills.includes(skillId)) {
-        return { ...prevFormData, skills: skills.filter((id) => id !== skillId) };
-      } else {
-        return { ...prevFormData, skills: [...skills, skillId] };
-      }
+      return skills.includes(skillId)
+        ? { ...prevFormData, skills: skills.filter((id) => id !== skillId) }
+        : { ...prevFormData, skills: [...skills, skillId] };
     });
   };
 
-  // Soumettre le formulaire
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formDataToSubmit = new FormData();
+    formDataToSubmit.append('name', formData.name);
+    formDataToSubmit.append('description', formData.description);
+    formDataToSubmit.append('lien', formData.lien);
+    formDataToSubmit.append('repo', formData.repo);
+    formDataToSubmit.append('skills', JSON.stringify(formData.skills));
+
+    if (formData.img) {
+      formDataToSubmit.append('img', formData.img);
+    }
+
     try {
       if (editing) {
-        await axios.put(`/api/projects/${editing}`, formData);
+        await axios.put(`/api/projects/${editing}`, formDataToSubmit, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        });
       } else {
-        await axios.post('/api/projects', formData);
+        await axios.post('/api/projects', formDataToSubmit, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        });
       }
       setFormData({
         name: '',
-        img: '',
+        img: null,
         description: '',
         lien: '',
         repo: '',
-        skills: [], // Réinitialiser les skills après soumission
+        skills: [],
       });
+      setPreview(null); // Réinitialisation de l'aperçu
       setEditing(null);
       fetchProjects();
     } catch (error) {
@@ -103,8 +121,10 @@ const AdminProjects = () => {
   const handleEdit = (project) => {
     setFormData({
       ...project,
-      skills: project.skills.map(skill => skill.id) // Assurez-vous que les compétences sont formatées correctement
+      skills: project.skills.map((skill) => skill.id),
+      img: null,
     });
+    setPreview(null); // Reset de l'aperçu lors de l'édition
     setEditing(project.id);
   };
 
@@ -117,14 +137,13 @@ const AdminProjects = () => {
     }
   };
 
-  // Si l'utilisateur n'est pas authentifié, ne pas rendre le contenu
   if (!isAuthenticated) {
-    return null; // Vous pouvez aussi afficher un loader ici
+    return null;
   }
 
   return (
     <>
-      <nav className='navadmin'>
+      <nav className="navadmin">
         <Link href="/admin">Retour à l'Admin</Link>
       </nav>
       <div className="admin-projects">
@@ -141,13 +160,16 @@ const AdminProjects = () => {
           />
           <input
             className="input-img"
-            type="text"
+            type="file"
             name="img"
-            value={formData.img}
-            onChange={handleChange}
-            placeholder="URL de l'image"
-            required
+            onChange={handleFileChange}
+            accept="image/*"
           />
+          {preview && ( // Affichage de l'aperçu de l'image
+            <div className="image-preview">
+              <Image src={preview} alt="Aperçu de l'image" width={100} height={100} />
+            </div>
+          )}
           <textarea
             className="input-description"
             name="description"
@@ -174,11 +196,14 @@ const AdminProjects = () => {
             placeholder="Lien du dépôt"
             required
           />
-
-          {/* Menu déroulant pour sélectionner plusieurs compétences */}
-          <label className="skills-label" htmlFor="skills">Compétences liées:</label>
+          <label className="skills-label" htmlFor="skills">
+            Compétences liées:
+          </label>
           <div className="custom-dropdown">
-            <div className="dropdown-toggle" onClick={() => setDropdownOpen(!dropdownOpen)}>
+            <div
+              className="dropdown-toggle"
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+            >
               Sélectionner des compétences
             </div>
             {dropdownOpen && (
@@ -196,53 +221,10 @@ const AdminProjects = () => {
               </div>
             )}
           </div>
-
-          <button className="submit-button" type="submit">{editing ? 'Modifier' : 'Ajouter'}</button>
+          <button className="submit-button" type="submit">
+            {editing ? 'Modifier' : 'Ajouter'}
+          </button>
         </form>
-
-        <h2 className="project-list-title">Liste des Projets</h2>
-        <ul className="project-list">
-          {projects.map((project) => (
-            <li className="project-card" key={project.id}>
-              <h3 className="project-name">{project.name}</h3>
-              <Image 
-                className="project-img" 
-                src={project.img} 
-                alt={project.name} 
-                width={100} // Spécifiez la largeur
-                height={100} // Spécifiez la hauteur
-              />
-              <p className="project-description">{project.description}</p>
-              <h4 className="skills-title">Compétences:</h4>
-              <ul className="skills-list">
-                {project.skills.length > 0 ? (
-                  project.skills.map((skill) => (
-                    <li className="skill-item" key={skill.id}>
-                      <Image 
-                        className="skill-img" 
-                        src={skill.image} 
-                        alt={skill.name} 
-                        width={30} // Spécifiez la largeur
-                        height={30} // Spécifiez la hauteur
-                      />
-                      {skill.name}
-                    </li>
-                  ))
-                ) : (
-                  <li className="no-skills">Aucune compétence associée.</li>
-                )}
-              </ul>
-              <p className="projectlink">
-                <strong>Lien:</strong> <a href={project.lien} target="_blank" rel="noopener noreferrer">{project.lien}</a>
-              </p>
-              <p className="project-repo">
-                <strong>Repo:</strong> <a href={project.repo} target="_blank" rel="noopener noreferrer">{project.repo}</a>
-              </p>
-              <button className="edit-button" onClick={() => handleEdit(project)}>Modifier</button>
-              <button className="delete-button" onClick={() => handleDelete(project.id)}>Supprimer</button>
-            </li>
-          ))}
-        </ul>
       </div>
     </>
   );
