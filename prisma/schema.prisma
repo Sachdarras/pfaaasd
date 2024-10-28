@@ -29,10 +29,11 @@ model Project {
 model Skill {
   id    Int    @id @default(autoincrement())
   name  String @unique
-  image String
+  image String @db.LongText
   order Int 
   projects Project[] @relation("ProjectSkill")
 }
+
 
 model User {
   id      Int    @id @default(autoincrement())

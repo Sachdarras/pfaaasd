@@ -5,7 +5,7 @@ import Footer from '../app/components/Footer'; // Corrigez le chemin ici
 import './style/global.scss';
 
 export const metadata = {
-  title: "Titre de votre page", // Mettez votre titre ici
+  title: "ASD-Portefolio", // Mettez votre titre ici
   description: "Description de votre page", // Mettez votre description ici
   icons: {
     icon: "/assets/favicon.ico", // Mettez à jour le chemin de votre favicon
