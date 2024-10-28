@@ -1,11 +1,11 @@
 "use client"; // Assurez-vous qu'il s'agit d'un composant client
-import ParticlesBackground from "../../components/ParticlesBackground.jsx" // Corrigez le chemin ici
-import { useEffect, useState } from "react";
+
+import React, { useEffect, useState } from "react"; // Importer React ici
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 function ProjectPage({ params }) {
-  const { id } = params; // Récupérer l'ID des paramètres
+  const id = params.id; // Accéder à l'ID directement, sans React.use()
   const router = useRouter(); // Utiliser le router pour la navigation
 
   // State pour stocker les données du projet et les projets pour le carrousel
@@ -17,6 +17,8 @@ function ProjectPage({ params }) {
   // Utiliser useEffect pour récupérer les données du projet et les projets pour le carrousel
   useEffect(() => {
     const fetchProject = async () => {
+      if (!id) return; // Ne pas faire la requête si l'ID n'est pas défini
+
       try {
         // Récupérer le projet spécifique par son ID via l'API
         const res = await fetch(`/api/projects/${id}`);
@@ -53,7 +55,7 @@ function ProjectPage({ params }) {
   }
 
   return (
-    <>  <ParticlesBackground />
+    <>
       {/* Carousel des projets */}
       <div className="project-carousel">
         {allProjects.map((proj) => (

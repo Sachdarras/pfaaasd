@@ -1,6 +1,6 @@
 @use "./variable.scss";
 .homepage-container {
-  position: absolute; // Assurez-vous que la position est relative
+  position: relative; // Assurez-vous que la position est relative
   z-index: 1; // Doit être supérieur à celui des particules
 }
 

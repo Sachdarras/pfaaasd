@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 // Récupérer un projet spécifique (GET)
 export async function GET(req, { params }) {
-  const { id } = params;
+  const { id } = params; // Assurez-vous que params est correctement passé
 
   try {
     const project = await prisma.project.findUnique({
