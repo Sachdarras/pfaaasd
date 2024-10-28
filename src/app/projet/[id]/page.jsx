@@ -56,6 +56,7 @@ function ProjectPage({ params }) {
 
   return (
     <>
+   
       {/* Carousel des projets */}
       <div className="project-carousel">
         {allProjects.map((proj) => (
