@@ -25,18 +25,22 @@ function ProjectPage({ params }) {
         const res = await fetch(`/api/projects/${id}`);
         const data = await res.json();
 
-        if (res.ok) {
+        // Récupérer tous les projets pour le carrousel
+        const allProjectsRes = await fetch("/api/projects");
+        const allProjectsData = await allProjectsRes.json();
+
+        if (res.ok && data) {
           setProject(data); // Assurez-vous que les données existent
           setSkills(data.skills || []); // Assurez-vous que les compétences existent, sinon un tableau vide
         } else {
           console.error(data.error); // Afficher l'erreur si le projet n'est pas trouvé
+          // Choisir un projet aléatoire si le projet demandé n'existe pas
+          const randomProject = allProjectsData[Math.floor(Math.random() * allProjectsData.length)];
+          setProject(randomProject); // Définir un projet aléatoire
+          setSkills(randomProject.skills || []); // Récupérer les compétences du projet aléatoire
         }
 
-        // Récupérer tous les projets pour le carrousel
-        const allProjectsRes = await fetch("/api/projects");
-        const allProjectsData = await allProjectsRes.json();
         setAllProjects(allProjectsData);
-
         setLoading(false);
       } catch (error) {
         console.error("Erreur lors de la récupération des projets:", error);
@@ -54,11 +58,6 @@ function ProjectPage({ params }) {
         <div className="loader"></div>
       </div>
     );
-  }
-
-  // Si le projet n'est pas trouvé
-  if (!project) {
-    return <div>Projet non trouvé</div>;
   }
 
   return (
