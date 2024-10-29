@@ -16,6 +16,7 @@ export async function GET(req) {
     console.error('Erreur lors de la récupération des projets:', error);
     return new Response(JSON.stringify({ error: 'Erreur lors de la récupération des projets.' }), {
       status: 500,
+      headers: { 'Content-Type': 'application/json' },
     });
   }
 }
@@ -24,9 +25,20 @@ export async function GET(req) {
 export async function POST(req) {
   try {
     const data = await req.json();
+    console.log("Données reçues pour création :", data); // Journaliser pour vérifier
+
+    // Validation pour s'assurer que `data` est bien un objet et non vide
+    if (typeof data !== 'object' || data === null || Array.isArray(data)) {
+      return new Response(JSON.stringify({ error: 'Format de données JSON invalide' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
     const newProject = await prisma.project.create({
       data,
     });
+
     return new Response(JSON.stringify(newProject), {
       status: 201,
       headers: { 'Content-Type': 'application/json' },
@@ -35,6 +47,7 @@ export async function POST(req) {
     console.error('Erreur lors de la création du projet:', error);
     return new Response(JSON.stringify({ error: 'Erreur lors de la création du projet.' }), {
       status: 500,
+      headers: { 'Content-Type': 'application/json' },
     });
   }
 }

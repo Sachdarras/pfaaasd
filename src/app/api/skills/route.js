@@ -1,58 +1,44 @@
 import { PrismaClient } from '@prisma/client';
-import { NextResponse } from 'next/server';
 
 const prisma = new PrismaClient();
 
-// Récupère toutes les compétences
+// Récupérer toutes les compétences (GET)
 export async function GET() {
   try {
-    const skills = await prisma.skill.findMany({
-      orderBy: {
-        order: 'asc', // Assurez-vous de trier par ordre
-      },
+    const skills = await prisma.skill.findMany();
+    return new Response(JSON.stringify(skills), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
     });
-    return NextResponse.json(skills);
   } catch (error) {
     console.error('Erreur lors de la récupération des compétences:', error);
-    return NextResponse.json({ error: 'Erreur lors de la récupération des compétences' }, { status: 500 });
+    return new Response(JSON.stringify({ error: 'Erreur lors de la récupération des compétences.' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 }
 
-// Crée une nouvelle compétence
+// Ajouter une compétence (POST)
 export async function POST(req) {
-  const { name, image } = await req.json();
+  const data = await req.json();
 
   try {
-    const newSkill = await prisma.skill.create({
+    const skill = await prisma.skill.create({
       data: {
-        name,
-        image,
-        order: 0, // Définissez l'ordre par défaut ici si nécessaire
+        name: data.name,
       },
     });
-    return NextResponse.json(newSkill);
-  } catch (error) {
-    console.error('Erreur lors de la création de la compétence:', error);
-    return NextResponse.json({ error: 'Erreur lors de la création de la compétence' }, { status: 500 });
-  }
-}
 
-// Met à jour l'ordre des compétences
-export async function PATCH(req) {
-  const skillsUpdate = await req.json();
-
-  try {
-    await Promise.all(
-      skillsUpdate.map(({ id, order }) =>
-        prisma.skill.update({
-          where: { id: parseInt(id, 10) },
-          data: { order },
-        })
-      )
-    );
-    return NextResponse.json({ message: 'Ordre mis à jour avec succès' });
+    return new Response(JSON.stringify(skill), {
+      status: 201,
+      headers: { 'Content-Type': 'application/json' },
+    });
   } catch (error) {
-    console.error('Erreur lors de la mise à jour de l\'ordre:', error);
-    return NextResponse.json({ error: 'Erreur lors de la mise à jour de l\'ordre' }, { status: 500 });
+    console.error('Erreur lors de l\'ajout de la compétence:', error);
+    return new Response(JSON.stringify({ error: 'Erreur lors de l\'ajout de la compétence.' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 }
