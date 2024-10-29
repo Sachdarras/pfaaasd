@@ -1,11 +1,12 @@
 "use client"; // Assurez-vous qu'il s'agit d'un composant client
 
-import React, { useEffect, useState } from "react"; // Importer React ici
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import ParticlesBackground from '../../components/ParticlesBackground'; // Corrigez le chemin ici
+
 function ProjectPage({ params }) {
-  const id = params.id; // Accéder à l'ID directement, sans React.use()
+  const id = params.id; // Accéder à l'ID directement
   const router = useRouter(); // Utiliser le router pour la navigation
 
   // State pour stocker les données du projet et les projets pour le carrousel
@@ -46,17 +47,24 @@ function ProjectPage({ params }) {
     fetchProject();
   }, [id]);
 
+  // Affichage du loader pendant le chargement
   if (loading) {
-    return <div>Chargement...</div>;
+    return (
+      <div className="loader-container">
+        <div className="loader"></div>
+      </div>
+    );
   }
 
+  // Si le projet n'est pas trouvé
   if (!project) {
     return <div>Projet non trouvé</div>;
   }
 
   return (
     <>
-     <ParticlesBackground />
+      <ParticlesBackground />
+
       {/* Carousel des projets */}
       <div className="project-carousel">
         {allProjects.map((proj) => (
@@ -86,7 +94,7 @@ function ProjectPage({ params }) {
         <p>{project.description}</p>
         <h2 className="skilltitle">Compétences</h2>
         <div className="techno-container">
-          {skills.length > 0 ? ( // Vérifier si skills n'est pas vide
+          {skills.length > 0 ? (
             skills.map((skill) => (
               <Image
                 key={skill.id}
@@ -98,7 +106,7 @@ function ProjectPage({ params }) {
               />
             ))
           ) : (
-            <p>Aucune compétence disponible.</p> // Message si aucune compétence
+            <p>Aucune compétence disponible.</p>
           )}
         </div>
         <ul>
