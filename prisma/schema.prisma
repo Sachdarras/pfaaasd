@@ -14,6 +14,7 @@ model Description {
   subtitle String
   content String @db.LongText
   image   String @db.LongText
+  
 }
 
 model Project {
@@ -30,7 +31,6 @@ model Skill {
   id    Int    @id @default(autoincrement())
   name  String @unique
   image String @db.LongText
-  order Int 
   projects Project[] @relation("ProjectSkill")
 }
 

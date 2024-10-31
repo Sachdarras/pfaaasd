@@ -23,14 +23,15 @@ CREATE TABLE `Project` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
+-- CreateTable
 CREATE TABLE `Skill` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(191) NOT NULL,
     `image` LONGTEXT NOT NULL,
-    `order` INTEGER NOT NULL,
     UNIQUE INDEX `Skill_name_key`(`name`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 
 -- CreateTable
 CREATE TABLE `User` (
@@ -61,24 +62,25 @@ INSERT INTO Description (name, title, subtitle, content, image) VALUES
 ('Alexandre-Sacha Darras', 'Développeur web full-stack JavaScript', 'À propos de moi', 'Après 10 ans passés dans le milieu du spectacle comme régisseur et concepteur lumières, il était temps de changer de vie. Je me suis donc orienté vers un métier qui reste créatif. C''est pour cela que mon regard s''est posé sur le développement web. Pour cela, je recherche une alternance pour une durée de 15 mois, afin de préparer un diplôme de Concepteur Développeur d''Applications de niveau Bac+4.', '/assets/images/profil.jpg');
 
 -- Ajouter les compétences
-INSERT INTO Skill (name, image, `order`) VALUES
-('HTML', '/assets/skills/html-1.svg', 1),
-('CSS', '/assets/skills/css-3.svg', 2),
-('JavaScript', '/assets/skills/javascript-1.svg', 3),
-('Git', '/assets/skills/git-icon.svg', 4),
-('GitHub', '/assets/skills/github-icon-1.svg', 5),
-('Figma', '/assets/skills/figma-5.svg', 6),
-('NPM', '/assets/skills/npm.svg', 7),
-('Git Bash', '/assets/skills/git-bash.svg', 8),
-('Node.js', '/assets/skills/nodejs-1.svg', 9),
-('Leaflet', '/assets/skills/leaflet-seeklogo.svg', 10),
-('React', '/assets/skills/react-2.svg', 11),
-('Sass', '/assets/skills/sass-1.svg', 12),
-('MySQL', '/assets/skills/mysql.png', 13),
-('Three.js', '/assets/skills/three-js-icon.svg', 14),
-('Prisma', '/assets/skills/prisma.svg', 15),
-('NextJs', '/assets/skills/next-js.svg', 16);
- 
+-- Ajouter les compétences sans le champ `order`
+INSERT INTO Skill (name, image) VALUES
+('HTML', '/assets/skills/html.svg'),
+('CSS', '/assets/skills/css.svg'),
+('JavaScript', '/assets/skills/javascript.svg'),
+('Git', '/assets/skills/git-icon.svg'),
+('GitHub', '/assets/skills/github-icon.svg'),
+('Figma', '/assets/skills/figma.svg'),
+('NPM', '/assets/skills/npm.svg'),
+('Git Bash', '/assets/skills/git-bash.svg'),
+('Node.js', '/assets/skills/nodejs.svg'),
+('Leaflet', '/assets/skills/leaflet-seeklogo.svg'),
+('React', '/assets/skills/react.svg'),
+('Sass', '/assets/skills/sass.svg'),
+('MySQL', '/assets/skills/mysql.png'),
+('Three.js', '/assets/skills/three-js-icon.svg'),
+('Prisma', '/assets/skills/prisma.svg'),
+('NextJs', '/assets/skills/next-js.svg');
+
 
 
 -- Ajouter les projets

@@ -14,6 +14,7 @@ function ProjectPage({ params }) {
   const [skills, setSkills] = useState([]); // Initialiser avec un tableau vide
   const [allProjects, setAllProjects] = useState([]); // Pour stocker tous les projets
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null); // Pour gérer les erreurs
 
   // Utiliser useEffect pour récupérer les données du projet et les projets pour le carrousel
   useEffect(() => {
@@ -33,17 +34,14 @@ function ProjectPage({ params }) {
           setProject(data); // Assurez-vous que les données existent
           setSkills(data.skills || []); // Assurez-vous que les compétences existent, sinon un tableau vide
         } else {
-          console.error(data.error); // Afficher l'erreur si le projet n'est pas trouvé
-          // Choisir un projet aléatoire si le projet demandé n'existe pas
-          const randomProject = allProjectsData[Math.floor(Math.random() * allProjectsData.length)];
-          setProject(randomProject); // Définir un projet aléatoire
-          setSkills(randomProject.skills || []); // Récupérer les compétences du projet aléatoire
+          setError("Projet non trouvé."); // Afficher un message d'erreur
         }
 
         setAllProjects(allProjectsData);
         setLoading(false);
       } catch (error) {
         console.error("Erreur lors de la récupération des projets:", error);
+        setError("Erreur de connexion."); // Afficher un message d'erreur de connexion
         setLoading(false);
       }
     };
@@ -58,6 +56,11 @@ function ProjectPage({ params }) {
         <div className="loader"></div>
       </div>
     );
+  }
+
+  // Affichage d'un message d'erreur si le projet n'est pas trouvé
+  if (error) {
+    return <div className="error-message">{error}</div>;
   }
 
   return (
