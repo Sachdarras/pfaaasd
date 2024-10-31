@@ -27,6 +27,7 @@ export async function POST(req) {
     const skill = await prisma.skill.create({
       data: {
         name: data.name,
+        img: data.img, // Assurez-vous d'ajouter l'URL de l'image ici
       },
     });
 

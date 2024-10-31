@@ -24,12 +24,12 @@ export async function GET(req, { params }) {
 // Met à jour une compétence par son ID
 export async function PUT(req, { params }) {
   const { id } = params;
-  const { name, image } = await req.json();
+  const { name, img } = await req.json();
 
   try {
     const updatedSkill = await prisma.skill.update({
       where: { id: parseInt(id) },
-      data: { name, image },
+      data: { name, img },
     });
     return NextResponse.json(updatedSkill);
   } catch (error) {

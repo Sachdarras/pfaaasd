@@ -1,86 +1,40 @@
-import { PrismaClient } from '@prisma/client';
+// src/app/api/projects/[id]/route.js
 
-const prisma = new PrismaClient();
+import { NextResponse } from 'next/server';
+import prisma from '../../../lib/prsima'; // Assure-toi que le chemin est correct
 
-// Lire un projet par ID
-export async function GET(req, { params }) {
-  const { id } = params;
-
-  try {
-    const project = await prisma.project.findUnique({
-      where: { id: parseInt(id) },
-      include: { skills: true }, // Inclure les compétences si nécessaire
-    });
-
-    if (!project) {
-      return new Response(JSON.stringify({ error: 'Projet non trouvé.' }), {
-        status: 404,
-      });
-    }
-
-    return new Response(JSON.stringify(project), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
-    });
-  } catch (error) {
-    console.error('Erreur lors de la récupération du projet:', error);
-    return new Response(JSON.stringify({ error: 'Erreur lors de la récupération du projet.' }), {
-      status: 500,
-    });
-  }
-}
-
-// Mettre à jour un projet par ID
-export async function PUT(req, { params }) {
-  const { id } = params;
+export async function PUT(request, { params }) {
+  const projectId = parseInt(params.id, 10);
+  
+  // Récupérer les données du corps de la requête
+  const data = await request.json();
 
   try {
-    const data = await req.json();
-    const { skills, ...projectData } = data;
-
+    // Mise à jour du projet avec les données fournies
     const updatedProject = await prisma.project.update({
-      where: { id: parseInt(id) },
+      where: { id: projectId },
       data: {
-        ...projectData,
+        name: data.name,
+        img: data.img,
+        description: data.description,
+        lien: data.lien,
+        repo: data.repo,
         skills: {
-          set: [], // Détache toutes les compétences existantes d'abord pour réinitialiser
-          connectOrCreate: skills.map(skill => ({
-            where: { id: skill.id },
-            create: { name: skill.name, image: skill.image, order: skill.order },
+          connectOrCreate: data.skills.map(skill => ({
+            where: { id: skill.id }, // Assure-toi que 'skill.id' existe
+            create: {
+              name: skill.name, // Assure-toi que 'skill.name' est défini
+              image: skill.image, // Assure-toi que 'skill.image' est défini
+           
+            },
           })),
         },
       },
     });
 
-    return new Response(JSON.stringify(updatedProject), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    return NextResponse.json(updatedProject);
   } catch (error) {
-    console.error('Erreur lors de la mise à jour du projet:', error);
-    return new Response(JSON.stringify({ error: 'Erreur lors de la mise à jour du projet.' }), {
-      status: 500,
-    });
-  }
-}
-
-// Supprimer un projet par ID
-export async function DELETE(req, { params }) {
-  const { id } = params;
-
-  try {
-    await prisma.project.delete({
-      where: { id: parseInt(id) },
-    });
-
-    return new Response(JSON.stringify({ message: 'Projet supprimé avec succès.' }), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
-    });
-  } catch (error) {
-    console.error('Erreur lors de la suppression du projet:', error);
-    return new Response(JSON.stringify({ error: 'Erreur lors de la suppression du projet.' }), {
-      status: 500,
-    });
+    console.error('Error updating project:', error);
+    return NextResponse.json({ error: 'Error updating project' }, { status: 500 });
   }
 }
