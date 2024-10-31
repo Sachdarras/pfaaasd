@@ -75,7 +75,11 @@ INSERT INTO Skill (name, image, `order`) VALUES
 ('React', '/assets/skills/react-2.svg', 11),
 ('Sass', '/assets/skills/sass-1.svg', 12),
 ('MySQL', '/assets/skills/mysql.png', 13),
-('Three.js', '/assets/skills/three-js-icon.svg', 14);
+('Three.js', '/assets/skills/three-js-icon.svg', 14),
+('Prisma', '/assets/skills/prisma.svg', 15),
+('NextJs', '/assets/skills/next-js.svg', 16);
+
+
 
 -- Ajouter les projets
 INSERT INTO Project (name, img, description, lien, repo) VALUES
