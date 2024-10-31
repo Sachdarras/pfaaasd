@@ -100,3 +100,50 @@
     }
   }
 }
+.formdesc {
+  width: 100%; // S'assurer que le formulaire prend toute la largeur
+  display: flex;
+  flex-direction: column;
+  align-items: center; // Centrer les éléments
+
+  h2 {
+    margin-bottom: 20px; // Espacement en bas du titre
+    color: #333; // Couleur du texte
+  }
+
+  input[type="text"],
+  textarea,
+  input[type="file"] {
+    width: 80%; // Largeur adaptable
+    margin-bottom: 15px; // Espacement entre les champs
+    padding: 10px; // Espacement interne
+    border: 1px solid #ccc; // Bordure légère
+    border-radius: 5px; // Coins arrondis
+    font-size: 1rem; // Taille de la police
+  }
+
+  textarea {
+    height: 100px; // Hauteur spécifique pour le textarea
+    resize: vertical; // Permettre le redimensionnement vertical
+  }
+
+  button {
+    width: 40%; // Largeur adaptable pour le bouton
+    padding: 10px; // Espacement interne
+    border: none; // Supprimer la bordure
+    border-radius: 5px; // Coins arrondis
+    background-color: #007bff; // Couleur de fond
+    color: white; // Couleur du texte
+    font-size: 1rem; // Taille de la police
+    cursor: pointer; // Changer le curseur au survol
+    transition: background-color 0.3s; // Animation de la couleur
+
+    &:hover {
+      background-color: #0056b3; // Couleur au survol
+    }
+
+    &:not(:last-child) {
+      margin-right: 10px; // Espacement entre les boutons
+    }
+  }
+}
