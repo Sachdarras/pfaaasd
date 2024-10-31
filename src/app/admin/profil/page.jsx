@@ -224,7 +224,7 @@ return (
 
       {/* Formulaire pour modifier les descriptions */}
       {editingId && (
-        <form onSubmit={handleSubmit}>
+        <form className="formdesc" onSubmit={handleSubmit}>
           <h2>{editingId ? 'Modifier la Description' : 'Ajouter une Description'}</h2>
           <input
             type="text"
@@ -305,6 +305,7 @@ return (
     </div>
   </>
 );
+
 
 };
 
